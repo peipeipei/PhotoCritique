@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="critique.css">
+    <title>Hi there</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    	$(document).ready(function(){
+
+    	$(".comment").on("click", function(){
+    		var id = this.id
+    		$('.comment').each(function(i, obj) {
+    			photo_id = obj.id.substring(8);
+    			if (id === obj.id){
+    				$("#" + obj.id).addClass("active");
+    				$("#image").attr("src", "cute-animals-group" + photo_id + ".jpg")
+    			}
+    			else {
+    				$("#" + obj.id).removeClass("active");
+    			}
+			});
+    	})
+    	})
+    </script>
+</head>
+<body>
+
+<div id = "container">
+<div id = "photo">
+	<h2>Bunny and Chicks</h2>
+    <img id = "image" src="cute-animals-group1.jpg"/>
+</div>
+<div id = "comments">
+	<h2>Critiques</h2>
+	<div class = "comment" id="comment_1">
+		These areas are in the shadow and I think they would look better if they were in light.
+	</div>
+	<div class = "comment" id = "comment_2">
+		Great focus! I love how the whiskers and fur stand out!
+	</div>
+	<div class = "comment" id = "comment_3">
+		I like how the background is blurred so the animals stand out.
+	</div>
+</div>
+</div>
+</body>
+</html>

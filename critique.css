@@ -1,0 +1,26 @@
+body {
+	font-family: "Trebuchet MS";
+}
+
+#photo {
+	position: relative;
+	float: left;
+}
+
+#comments {
+	position: relative;
+	float:left;
+	width: 400px;
+	margin: 10px;
+}
+
+.comment {
+	height: 60px;
+	background-color: white;
+	padding: 5px;
+	border: 1px solid gray;
+}
+
+.active {
+	background-color: #D8D8D8;
+}
