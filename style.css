@@ -14,5 +14,13 @@
 }
 
 .header_links .btn:hover{
-    background-color:lightblue;
+    background-color:rgba(244,250,210,1);
+}
+
+.header_links .glyphicon{
+    color:rgba(255,66,66,0.8);
+}
+
+.glyphicon{
+    color:rgba(255,66,66,0.8);
 }

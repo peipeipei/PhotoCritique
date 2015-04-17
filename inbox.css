@@ -1,27 +1,37 @@
-table {
-	border: 1px solid gray;
+h1 {
+    margin: 20px;
+}
+
+.inbox_div table {
+	border: 1px solid lightgrey;
 	background-color: #eeeeee;
-	width: 1000px;
+	width: 90%;
 	margin: 20px;
 }
 
-tr {
-	border: 1px solid gray;	
+.inbox_div tr {
+	border: 1px solid lightgrey;	
 }
-td{
+.inbox_div td{
 	padding: 5px;
 }
 
-td a {
+.inbox_div td a {
 	display: block;
 	text-decoration: none;
 	color: black;
 }
 
-td a:hover {
+.inbox_div td a:hover {
 	text-decoration: none;
 	color: black;
 }
-.unread {
+
+.inbox_div .unread {
 	font-weight: bold;
+    background-color: #fdfdfd;
+}
+
+.inbox_div tr:hover{
+    background-color:rgba(244,250,210,1);
 }
