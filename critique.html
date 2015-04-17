@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="photopage.css">
+    <link rel="stylesheet" type="text/css" href="critique.css">
+    <title>Hi there</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    	$(document).ready(function(){
+
+    	$(".comment").on("click", function(){
+    		var id = this.id
+    		$('.comment').each(function(i, obj) {
+    			photo_id = obj.id.substring(8);
+    			if (id === obj.id){
+    				$("#" + obj.id).addClass("active");
+    				$("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
+    			}
+    			else {
+    				$("#" + obj.id).removeClass("active");
+    			}
+			});
+    	})
+
+        $("#new_comment").on("click", function(){
+            window.location="critique2.html"
+        })
+
+    	})
+    </script>
+</head>
+<body>
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="gallery1.html">
+                        <img alt="Photique" src="">
+                    </a>
+                </div>
+            </div>
+        </nav>        
+    </div>
+<div id = "container">
+<div id = "photo">
+	<h2>Bunny and Chicks</h2>
+    <img id = "image" src="annotated_photos/cute-animals-group1.jpg"/>
+</div>
+<div id = "comments">
+	<h2>Comments</h2>
+	<div class = "comment active" id="comment_1">
+		These areas are in the shadow and I think they would look better if they were in light.
+	</div>
+	<div class = "comment" id = "comment_2">
+		Great focus! I love how the whiskers and fur stand out!
+	</div>
+	<div class = "comment" id = "comment_3">
+		I like how the background is blurred so the animals stand out.
+	</div>
+    <button id = "new_comment">New Comment</button>
+</div>
+</div>
+
+</body>
+</html>
