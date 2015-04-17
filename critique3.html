@@ -17,7 +17,7 @@
     			photo_id = obj.id.substring(8);
     			if (id === obj.id){
     				$("#" + obj.id).addClass("active");
-    				$("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
+    				$("#image").attr("src", "annotated_photos/cute-animals2-group" + photo_id + ".jpg")
     			}
     			else {
     				$("#" + obj.id).removeClass("active");
@@ -25,8 +25,8 @@
 			});
     	})
 
-        $("#new_comment").on("click", function(){
-            window.location = "critique3.html"
+        $("#image").on("click", function(){
+            window.location="critique2.html"
         })
 
     	})
@@ -45,9 +45,10 @@
         </nav>        
     </div>
 <div id = "container">
+    Click on something on the photo to leave a comment.
 <div id = "photo">
 	<h2>Bunny and Chicks</h2>
-    <img id = "image" src="annotated_photos/cute-animals-group4.jpg"/>
+    <img id = "image" src="annotated_photos/cute-animals2-group4.jpg"/>
 </div>
 <div id = "comments">
 	<h2>Comments</h2>
@@ -60,10 +61,9 @@
 	<div class = "comment" id = "comment_3">
 		I like how the background is blurred so the animals stand out.
 	</div>
-    <br /><br />
-    <textarea>The bunny is so fluffy!
-    </textarea>
-    <button id = "new_comment">Post Comment</button>
+    <div class = "comment active" id = "comment_4">
+        The bunny is so fluffy!
+    </div>
 </div>
 </div>
 </body>

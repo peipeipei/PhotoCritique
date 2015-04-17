@@ -11,6 +11,9 @@
 
     	$(document).ready(function(){
 
+        $("#image").on("click", function(){
+            window.location="critique2.html"
+        })
     	$(".comment").on("click", function(){
     		var id = this.id
     		$('.comment').each(function(i, obj) {
@@ -45,6 +48,7 @@
         </nav>        
     </div>
 <div id = "container">
+Click on something in the photo to leave a comment!
 <div id = "photo">
 	<h2>Bunny and Chicks</h2>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg"/>
@@ -60,7 +64,6 @@
 	<div class = "comment" id = "comment_3">
 		I like how the background is blurred so the animals stand out.
 	</div>
-    <button id = "new_comment">New Comment</button>
 </div>
 </div>
 
