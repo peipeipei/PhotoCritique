@@ -1,7 +1,3 @@
-body {
-	font-family: "Trebuchet MS";
-}
-
 #photo {
 	position: relative;
 	float: left;
@@ -18,9 +14,18 @@ body {
 	min-height: 50px;
 	background-color: white;
 	padding: 5px;
-	border: 1px solid gray;
+	border: 1px solid lightgrey;
+}
+
+.comment:hover{
+    background-color: #F0F2EB ;
 }
 
 .active {
-	background-color: #D8D8D8;
+	background-color:rgba(212,238,94,0.5);
+}
+
+textarea{
+    width:400px;
+    border: 1px solid rgba(255,66,66,0.8);
 }

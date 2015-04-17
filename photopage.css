@@ -2,6 +2,7 @@
     float:left;
     width: 60%;
     display-inline:block;
+    padding-left:20px;
 }
 
 .right{
@@ -41,6 +42,10 @@ textarea{
 
 .comment_btn_area{
     margin-left: 425px;
+}
+
+.comment_button{
+    background-color: rgba(225,237,185,1);
 }
 
 .username{
