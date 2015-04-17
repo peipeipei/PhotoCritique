@@ -48,7 +48,7 @@
                                 </a>
                             </td>
                             <td><button class="btn btn-default glyphicon glyphicon-user"> username</button></td>
-                            <td><a href="inbox.html"><button class="btn btn-default glyphicon glyphicon-inbox" title="Inbox"></a></button></td>
+                            <td><a href="inbox.html"><button class="btn btn-default glyphicon glyphicon-inbox" title="Inbox"></button></a></td>
                             <td><button class="btn btn-default glyphicon glyphicon-cloud-upload" title="Upload"></button></td>
                             <td><button class="btn btn-default glyphicon glyphicon-globe" title="Explore"></button></td>
                         </tr>
@@ -59,12 +59,16 @@
         </nav>        
     </div>
 <div id = "container">
+    <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
+    <h2>Critiquer: pikachu</h2>
+</div>
 <div id = "photo">
-	<h2>Bunny and Chicks <span style = "font-size: 16pt" class="pull-right">To bunnymaster</span></h2>
+	<h3>Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group4.jpg" style="width:512px;"/>
+    <div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>
 </div>
 <div id = "comments">
-	<h2>Focal Points</h2>
+	<h3>Focal Points</h3>
 	<div class = "comment" id="comment_1">
 		These areas are in the shadow and I think they would look better if they were in light.
 	</div>
@@ -77,7 +81,7 @@
     <br /><br />
     <textarea>The bunny is so fluffy!
     </textarea>
-    <button id = "new_comment">Post Comment</button>
+    <button id = "new_comment">Post Comment</button> <button id = "cancel">Cancel</button>
 </div>
 </div>
 </body>
