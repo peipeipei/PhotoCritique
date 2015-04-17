@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" type="text/css" href="critique.css">
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -11,23 +10,22 @@
 
     	$(document).ready(function(){
 
+        $("#image").on("click", function(){
+            window.location="critique2.html"
+        })
     	$(".comment").on("click", function(){
     		var id = this.id
     		$('.comment').each(function(i, obj) {
     			photo_id = obj.id.substring(8);
     			if (id === obj.id){
     				$("#" + obj.id).addClass("active");
-    				$("#image").attr("src", "annotated_photos/cute-animals2-group" + photo_id + ".jpg")
+    				$("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
     			}
     			else {
     				$("#" + obj.id).removeClass("active");
     			}
 			});
     	})
-
-        $("#image").on("click", function(){
-            window.location="critique2.html"
-        })
 
     	})
     </script>
@@ -44,29 +42,34 @@
             </div>
         </nav>        
     </div>
+        <a href = "inbox.html">Back to Inbox</a>
 <div id = "container">
+
 <div id = "photo">
-	<h2>Bunny and Chicks <span style = "font-size: 16pt" class="pull-right">To bunnymaster</span></h2>
-    <img id = "image" src="annotated_photos/cute-animals2-group4.jpg"/>
+	<h2>Bunny and Chicks<span style = "font-size: 16pt" class="pull-right">From pikachu 2:31 pm</span></h2>
+    <img id = "image" src="annotated_photos/cute-animals-group1.jpg"/>
 </div>
 <div id = "comments">
-	<h2>Focal Points</h2>
-	<div class = "comment" id="comment_1">
-		These areas are in the shadow and I think they would look better if they were in light.
+	<h2>Focal Points</h2> 
+	<div class = "comment active" id="comment_1">
+		These areas are in the shadow and I think they would look better if they were in light. <br/>
+        <span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+        <input type = "text" /><button id = "reply">Post reply</button>
 	</div>
 	<div class = "comment" id = "comment_2">
-		Great focus! I love how the whiskers and fur stand out!
+		Great focus! I love how the whiskers and fur stand out! <br/>
+        <span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span> 
 	</div>
 	<div class = "comment" id = "comment_3">
-		I like how the background is blurred so the animals stand out.
+		I like how the background is blurred so the animals stand out. <br/>
+        <span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span>
 	</div>
-    <div class = "comment active" id = "comment_4">
-        The bunny is so fluffy!
-    </div>
-        <div>
-    Click on the photo to add a comment!
 </div>
 </div>
-</div>
+
+
 </body>
 </html>
