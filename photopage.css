@@ -1,3 +1,21 @@
+.logo{
+    font-family: 'Redressed', cursive;
+    font-size:3em;
+}
+
+.left{
+    float:left;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.right{
+    float:right;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+
 img{
     margin:5px;
 }
@@ -26,6 +44,10 @@ textarea{
     width: 512px;
 }
 
+.comment_btn_area{
+    margin-left: 425px;
+}
+
 .username{
     color:darkblue;
 }
@@ -38,4 +60,24 @@ textarea{
 
 .username:hover{
     color:lightblue;
+}
+
+
+
+
+.button_area{
+    margin: 20px;
+}
+
+.glyphicon{
+    font-size:2.5em;
+    padding: 10px;
+    background-color: #f3f3f3;
+    border: 1px solid #dddddd;
+    border-radius: 16px;
+}
+
+.camera_info{
+    width:100%;
+    border: 1px solid #dddddd;
 }
