@@ -8,3 +8,25 @@ img{
     margin: 5px;
     padding: 5px;
 }
+
+.photopage_comments{
+    width: 512px;
+    border:1px solid #dddddd;
+    background:#ffffff;
+    margin: 5px;
+    padding: 5px;   
+}
+
+.username{
+    color:darkblue;
+}
+
+.a_comment{
+    margin:5px;
+    padding:5px;
+    background:#f1f1f1;
+}
+
+.username:hover{
+    color:lightblue;
+}
