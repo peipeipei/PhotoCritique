@@ -3,32 +3,40 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" type="text/css" href="critique.css">
         <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
+    
+    
     <script type="text/javascript">
 
-    	$(document).ready(function(){
+        $(document).ready(function(){
 
         $("#image").on("click", function(){
             window.location="critique2.html"
         })
-    	$(".comment").on("click", function(){
-    		var id = this.id
-    		$('.comment').each(function(i, obj) {
-    			photo_id = obj.id.substring(8);
-    			if (id === obj.id){
-    				$("#" + obj.id).addClass("active");
-    				$("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
-    			}
-    			else {
-    				$("#" + obj.id).removeClass("active");
-    			}
-			});
-    	})
+        $(".comment").on("click", function(){
+            var id = this.id
+            $('.comment').each(function(i, obj) {
+                photo_id = obj.id.substring(8);
+                if (id === obj.id){
+                    $("#" + obj.id).addClass("active");
+                    $("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
+                }
+                else {
+                    $("#" + obj.id).removeClass("active");
+                }
+            });
+        })
 
-    	})
+        $("#annotate").on("click", function(){
+            $(this).attr("disabled", true);
+        })
+
+        })
     </script>
 </head>
 <body>
@@ -44,7 +52,7 @@
                                 </a>
                             </td>
                             <td><button class="btn btn-default glyphicon glyphicon-user"> username</button></td>
-                            <td><a href="inbox.html"><button class="btn btn-default glyphicon glyphicon-inbox" title="Inbox"></a></button></td>
+                            <td><a href="inbox.html"><button class="btn btn-default glyphicon glyphicon-inbox" title="Inbox"></button></a></td>
                             <td><button class="btn btn-default glyphicon glyphicon-cloud-upload" title="Upload"></button></td>
                             <td><button class="btn btn-default glyphicon glyphicon-globe" title="Explore"></button></td>
                         </tr>
@@ -54,31 +62,33 @@
             </div>
         </nav>        
     </div>
-        <a href = "inbox.html">Back to Inbox</a>
 <div id = "container">
-
+    <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
+    <h2>Critiqued by: pikachu</h2>
+</div>
 <div id = "photo">
-	<h2>Bunny and Chicks<span style = "font-size: 16pt" class="pull-right">From pikachu 2:31 pm</span></h2>
-    <img id = "image" src="annotated_photos/cute-animals-group1.jpg"/>
+    <h3>Bunny and Chicks</h3>
+    <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
+    <div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>
 </div>
 <div id = "comments">
-	<h2>Focal Points</h2> 
-	<div class = "comment active" id="comment_1">
-		These areas are in the shadow and I think they would look better if they were in light. <br/>
-        <span class = "glyphicon glyphicon-share-alt"></span>
+    <h3>Focal Points</h3>
+    <div class = "comment active" id="comment_1">
+        These areas are in the shadow and I think they would look better if they were in light.<br/>
+                <span class = "glyphicon glyphicon-share-alt"></span>
         <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
         <input type = "text" /><button id = "reply">Post reply</button>
-	</div>
-	<div class = "comment" id = "comment_2">
-		Great focus! I love how the whiskers and fur stand out! <br/>
-        <span class = "glyphicon glyphicon-share-alt"></span>
-        <span class = "glyphicon glyphicon-thumbs-up"></span> 
-	</div>
-	<div class = "comment" id = "comment_3">
-		I like how the background is blurred so the animals stand out. <br/>
-        <span class = "glyphicon glyphicon-share-alt"></span>
+
+    </div>
+    <div class = "comment" id = "comment_2">
+        Great focus! I love how the whiskers and fur stand out!<br/>
+         <span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+    </div>
+    <div class = "comment" id = "comment_3">
+        I like how the background is blurred so the animals stand out. <br/>
+         <span class = "glyphicon glyphicon-share-alt"></span>
         <span class = "glyphicon glyphicon-thumbs-up"></span>
-	</div>
 </div>
 </div>
 
