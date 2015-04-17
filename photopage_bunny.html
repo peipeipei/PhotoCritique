@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="photopage.css">
     
     <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     
@@ -18,9 +18,20 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="">
-                        <span class="logo">Photique</span>
-                    </a>
+                    <table class="header_links">
+                        <tr>
+                            <td class="logo_td">
+                                <a class="navbar-brand" href="">
+                                    <span class="logo">Aperture</span>
+                                </a>
+                            </td>
+                            <td><button class="btn btn-default glyphicon glyphicon-user"> username</button></td>
+                            <td><button class="btn btn-default glyphicon glyphicon-inbox" title="Inbox"></button></td>
+                            <td><button class="btn btn-default glyphicon glyphicon-cloud-upload" title="Upload"></button></td>
+                            <td><button class="btn btn-default glyphicon glyphicon-globe" title="Explore"></button></td>
+                        </tr>
+                        
+                    </table>
                 </div>
             </div>
         </nav>        
@@ -71,7 +82,33 @@
         </div>
         
         <div class="camera_info">
-            
+            <table>
+                <tr>
+                    <td class="cam_info_left">Camera</td>
+                    <td class="cam_info_right">Nikon D700</td>
+                </tr>
+                
+                <tr>
+                    <td class="cam_info_left">Focal Length</td>
+                    <td class="cam_info_right">85mm</td>
+                </tr>
+                
+                <tr>
+                    <td class="cam_info_left">Shutter Speed</td>
+                    <td class="cam_info_right">1/320 s</td>
+                </tr>
+                
+                <tr>
+                    <td class="cam_info_left">Aperture</td>
+                    <td class="cam_info_right">f/1.4</td>
+                </tr>
+                
+                <tr>
+                    <td class="cam_info_left">ISO/Film</td>
+                    <td class="cam_info_right">200</td>
+                </tr>
+                
+            </table>
         </div>
         
         
