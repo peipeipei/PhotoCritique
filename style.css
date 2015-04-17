@@ -1,0 +1,18 @@
+.logo_td{
+    width:560px;
+}
+
+.logo{
+    font-family: 'Redressed', cursive;
+    font-size:3em;
+}
+
+.header_links .btn{
+    height:inherit;
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.header_links .btn:hover{
+    background-color:lightblue;
+}
