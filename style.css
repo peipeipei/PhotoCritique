@@ -6,9 +6,15 @@ body{
     width:560px;
 }
 
+/*
 .logo{
     font-family: 'Redressed', cursive;
     font-size:3em;
+}
+*/
+
+.navbar-brand{
+    padding-top:0px !important;
 }
 
 .header_links .btn{

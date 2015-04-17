@@ -2,6 +2,7 @@
     min-width: 1024px;
 }
 
-img{
-    
+.gallery_row img {
+    margin: 10px;
 }
+
