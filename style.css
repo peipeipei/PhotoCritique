@@ -2,35 +2,58 @@ body{
     font-family: 'Quattrocento Sans', sans-serif;
 }
 
+/*
 .logo_td{
-    width:560px;
+    width:40%;
 }
 
-/*
-.logo{
-    font-family: 'Redressed', cursive;
-    font-size:3em;
-}
-*/
+.header_links_td:40%;
 
 .navbar-brand{
-    padding-top:0px !important;
+    padding-top:0px 0px;
 }
 
-.header_links .btn{
+.navbar-header{
+    width:100%;
+}
+
+.header_links{
+    width:100%;
+}
+
+.the_header_links .btn{
     height:inherit;
     border: none;
     background-color: rgba(0,0,0,0);
 }
 
-.header_links .btn:hover{
+.the_header_links .btn:hover{
     background-color:rgba(244,250,210,1);
 }
 
-.header_links .glyphicon{
+.the_header_links .glyphicon{
     color:rgba(255,66,66,0.8);
 }
 
 .glyphicon{
     color:rgba(255,66,66,0.8);
+}*/
+
+
+
+
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    font-family: 'Redressed', cursive;
 }
+
+
+
+
+
