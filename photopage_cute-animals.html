@@ -18,6 +18,21 @@
                 $('.photopage_comments').append(add);
                 $('textarea').val("");
             })
+            
+            $(".like-button").on("click",function(){
+                if ($(this).hasClass("unliked")){
+                    $(this).removeClass("unliked");
+                    $(this).removeClass("glyphicon-heart-empty");
+                    $(this).addClass("glyphicon-heart");
+                    $(this).addClass("liked");
+                }
+                else{
+                    $(this).removeClass("liked");
+                    $(this).removeClass("glyphicon-heart");
+                    $(this).addClass("glyphicon-heart-empty");
+                    $(this).addClass("unliked");
+                }
+            });
         })
         
     </script>
