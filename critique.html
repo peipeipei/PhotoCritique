@@ -20,9 +20,8 @@
 
         $("#image").on("click", function(e){
             if ($("#annotate").hasClass("active")){
-                current_id++;
                 var img = document.createElement("img");
-                img.id = "img_" + current_id;
+                img.className = "img_" + current_id;
                 img.src = "circle.png";
                 var w = img.width;
 
@@ -36,33 +35,44 @@
 
                 $("#photo").append(img);
 
-                var comment = document.createElement("div");
-                $(comment).addClass("comment");
-                comment.id = "comment_" + current_id;
-
-                var textarea = document.createElement("textarea");
-                textarea.id = "text_" + current_id;
-                $(comment).append(textarea);
-
-                var post_comment = "<button class = 'post' id = 'post_" + current_id + "'>Post Comment</button>"
-                var cancel = "<button class = 'cancel' id = 'cancel_" + current_id + "'>Cancel</button>"
-
-                $(comment).append(post_comment);
-                $(comment).append(cancel);
-
-                $("#comments").append(comment);
-
-                $("#annotate").removeClass("active");
-                $(document.body).css({'cursor' : 'default'});  
+                //$("#annotate").removeClass("active");
+                //$(document.body).css({'cursor' : 'default'});  
             }
             //window.location="critique2.html"
         })
 
+        $("#add_comment").on("click", function(){
+            current_id++;
+            var comment = document.createElement("div");
+            $(comment).addClass("comment");
+            comment.id = "comment_" + current_id;
+
+            var textarea = document.createElement("textarea");
+            textarea.id = "text_" + current_id;
+            $(comment).append(textarea);
+
+            var new_div = '<div><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle.png"></button><button class = "cancel btn btn-default pull-right" id = "cancel_' + current_id + '">Cancel</button><button class = "post btn btn-default pull-right" id = "post_' + current_id + '">Post Comment</button></div>'
+            //var post_comment = '<button class = "post btn btn-default pull-right" id = "post_' + current_id + '">Post Comment</button>'
+            //var cancel = "<button class = 'cancel btn btn-default' id = 'cancel_" + current_id + "'>Cancel</button>"
+
+            $(comment).append(new_div);
+            //$(comment).append(post_comment);
+            //$(comment).append(cancel);
+
+            $("#comments").append(comment);
+
+            $(this).attr("disabled", true);
+        })
+
         $(document).on("click", ".cancel", function() {
             var id = this.id.substring(7);
-            $("#img_" + id).remove();
+            $(".img_" + id).remove();
             $("#comment_" + id).remove();
             current_id--;
+
+            $("#annotate").removeClass("active");
+            $(document.body).css({'cursor' : 'default'}); 
+            $("#add_comment").attr("disabled", false);
         })
 
         $(document).on("click", ".post", function() {
@@ -78,6 +88,10 @@
 
             $("#comments").append(comment);
             $(comment).addClass("active");
+
+            $("#annotate").removeClass("active");
+            $(document.body).css({'cursor' : 'default'});  
+            $("#add_comment").attr("disabled", false);
 
         })
 
@@ -98,7 +112,7 @@
 			});
     	})
 
-        $("#annotate").on("click", function(){
+        $(document).on("click", "#annotate", function(){
             if ($(this).hasClass("active")){
                 $(this).removeClass("active");
                 $(document.body).css({'cursor' : 'default'});     
@@ -141,11 +155,11 @@
 <div id = "photo">
 	<h3>Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
-    <div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
-    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>
+    <!--<div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
+    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>-->
 </div>
 <div id = "comments">
-	<h3>Focal Points</h3>
+	<h3>Focal Points <button id = "add_comment" class = "btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button></h3>
 	<div class = "comment active" id="comment_1">
 		These areas are in the shadow and I think they would look better if they were in light.
 	</div>
