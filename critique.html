@@ -16,9 +16,12 @@
     	$(document).ready(function(){
             var offsetLeft = $("#photo").offset().left;
             var offsetTop = $("#photo").offset().top;
+            var current_id = 4;
 
         $("#image").on("click", function(e){
+            current_id++;
             var img = document.createElement("img");
+            img.id = "img_" + current_id;
             img.src = "circle.png";
             var w = img.width;
 
@@ -34,12 +37,14 @@
 
             var comment = document.createElement("div");
             $(comment).addClass("comment");
+            comment.id = "comment_" + current_id;
 
             var textarea = document.createElement("textarea");
+            textarea.id = "text_" + current_id;
             $(comment).append(textarea);
 
-            var post_comment = "<button class = 'post_comment'>Post Comment</button>"
-            var cancel = "<button class = 'cancel'>Cancel</button>"
+            var post_comment = "<button class = 'post' id = 'post_" + current_id + "'>Post Comment</button>"
+            var cancel = "<button class = 'cancel' id = 'cancel_" + current_id + "'>Cancel</button>"
 
             $(comment).append(post_comment);
             $(comment).append(cancel);
@@ -47,13 +52,40 @@
             $("#comments").append(comment);
             //window.location="critique2.html"
         })
-    	$(".comment").on("click", function(){
+
+        $(document).on("click", ".cancel", function() {
+            var id = this.id.substring(7);
+            $("#img_" + id).remove();
+            $("#comment_" + id).remove();
+            current_id--;
+        })
+
+        $(document).on("click", ".post", function() {
+            var id = this.id.substring(5);
+            var msg = $("#text_" + id).val();
+            $("#comment_" + id).remove();
+
+           var comment = document.createElement("div");
+            $(comment).addClass("comment");
+            comment.id = "comment_" + current_id;
+
+            $(comment).append(msg);
+
+            $("#comments").append(comment);
+            $(comment).addClass("active");
+
+        })
+
+    	$(document).on("click", ".comment", function(){
     		var id = this.id
     		$('.comment').each(function(i, obj) {
     			photo_id = obj.id.substring(8);
     			if (id === obj.id){
     				$("#" + obj.id).addClass("active");
-    				$("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
+
+                    if (photo_id < 4){
+    				    $("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
+                    }
     			}
     			else {
     				$("#" + obj.id).removeClass("active");
