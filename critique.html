@@ -19,37 +19,42 @@
             var current_id = 4;
 
         $("#image").on("click", function(e){
-            current_id++;
-            var img = document.createElement("img");
-            img.id = "img_" + current_id;
-            img.src = "circle.png";
-            var w = img.width;
+            if ($("#annotate").hasClass("active")){
+                current_id++;
+                var img = document.createElement("img");
+                img.id = "img_" + current_id;
+                img.src = "circle.png";
+                var w = img.width;
 
-            // center image on mouse click
-            xPos = e.pageX - offsetLeft - w/2;
-            yPos = e.pageY - offsetTop - w/2;
+                // center image on mouse click
+                xPos = e.pageX - offsetLeft - w/2;
+                yPos = e.pageY - offsetTop - w/2;
 
-            img.style.position = "absolute"
-            img.style.left = xPos + "px";
-            img.style.top = yPos + "px";
+                img.style.position = "absolute"
+                img.style.left = xPos + "px";
+                img.style.top = yPos + "px";
 
-            $("#photo").append(img);
+                $("#photo").append(img);
 
-            var comment = document.createElement("div");
-            $(comment).addClass("comment");
-            comment.id = "comment_" + current_id;
+                var comment = document.createElement("div");
+                $(comment).addClass("comment");
+                comment.id = "comment_" + current_id;
 
-            var textarea = document.createElement("textarea");
-            textarea.id = "text_" + current_id;
-            $(comment).append(textarea);
+                var textarea = document.createElement("textarea");
+                textarea.id = "text_" + current_id;
+                $(comment).append(textarea);
 
-            var post_comment = "<button class = 'post' id = 'post_" + current_id + "'>Post Comment</button>"
-            var cancel = "<button class = 'cancel' id = 'cancel_" + current_id + "'>Cancel</button>"
+                var post_comment = "<button class = 'post' id = 'post_" + current_id + "'>Post Comment</button>"
+                var cancel = "<button class = 'cancel' id = 'cancel_" + current_id + "'>Cancel</button>"
 
-            $(comment).append(post_comment);
-            $(comment).append(cancel);
+                $(comment).append(post_comment);
+                $(comment).append(cancel);
 
-            $("#comments").append(comment);
+                $("#comments").append(comment);
+
+                $("#annotate").removeClass("active");
+                $(document.body).css({'cursor' : 'default'});  
+            }
             //window.location="critique2.html"
         })
 
@@ -94,7 +99,14 @@
     	})
 
         $("#annotate").on("click", function(){
-            $(this).attr("disabled", true);
+            if ($(this).hasClass("active")){
+                $(this).removeClass("active");
+                $(document.body).css({'cursor' : 'default'});     
+            }
+            else {
+                $(this).addClass("active");
+                $(document.body).css({'cursor' : 'url("circle.png"), auto'});     
+            }
         })
 
     	})
@@ -129,7 +141,8 @@
 <div id = "photo">
 	<h3>Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
-    <div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>
+    <div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
+    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>
 </div>
 <div id = "comments">
 	<h3>Focal Points</h3>
