@@ -14,9 +14,38 @@
     <script type="text/javascript">
 
     	$(document).ready(function(){
+            var offsetLeft = $("#photo").offset().left;
+            var offsetTop = $("#photo").offset().top;
 
-        $("#image").on("click", function(){
-            window.location="critique2.html"
+        $("#image").on("click", function(e){
+            var img = document.createElement("img");
+            img.src = "circle.png";
+            var w = img.width;
+
+            // center image on mouse click
+            xPos = e.pageX - offsetLeft - w/2;
+            yPos = e.pageY - offsetTop - w/2;
+
+            img.style.position = "absolute"
+            img.style.left = xPos + "px";
+            img.style.top = yPos + "px";
+
+            $("#photo").append(img);
+
+            var comment = document.createElement("div");
+            $(comment).addClass("comment");
+
+            var textarea = document.createElement("textarea");
+            $(comment).append(textarea);
+
+            var post_comment = "<button class = 'post_comment'>Post Comment</button>"
+            var cancel = "<button class = 'cancel'>Cancel</button>"
+
+            $(comment).append(post_comment);
+            $(comment).append(cancel);
+
+            $("#comments").append(comment);
+            //window.location="critique2.html"
         })
     	$(".comment").on("click", function(){
     		var id = this.id

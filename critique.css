@@ -4,6 +4,7 @@
 #photo {
 	position: relative;
 	float: left;
+	min-height: 0px;
 }
 
 #comments {
