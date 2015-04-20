@@ -2,6 +2,7 @@ body{
     font-family: 'Quattrocento Sans', sans-serif;
 }
 
+
 /*
 .logo_td{
     width:40%;
@@ -34,10 +35,11 @@ body{
 .the_header_links .glyphicon{
     color:rgba(255,66,66,0.8);
 }
+*/
 
-.glyphicon{
+.navbar .glyphicon{
     color:rgba(255,66,66,0.8);
-}*/
+}
 
 
 

@@ -25,15 +25,15 @@ img{
 
 .photopage_comments{
     width: 512px;
-    border:1px solid #dddddd;
+/*    border:1px solid #dddddd;*/
     background:#ffffff;
-    margin: 5px;
-    padding: 5px;   
+/*    margin: 5px;*/
+/*    padding: 5px;   */
 }
 
 .comment_area{
     width: 512px;
-    margin:5px;
+    margin-left:5px;
 }
 
 textarea{
@@ -50,12 +50,14 @@ textarea{
 
 .username{
     color:darkblue;
+    font-weight: bolder;
 }
 
 .a_comment{
-    margin:5px;
-    padding:5px;
-/*    background:#f1f1f1;*/
+    width: 100%;
+    margin:10px;
+    padding:10px;
+    background:#f1f1f1;
 }
 
 .username:hover{

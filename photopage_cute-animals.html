@@ -9,7 +9,18 @@
     <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
     
-    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".comment_button").on("click", function(){
+                var comment = $('textarea').val();
+                var user = $('.glyphicon-user').text();
+                var add = '<div class="a_comment">' + '<p class="username">' + user + '</p>' + '<div class="the_comment">' + comment + '</div></div>'
+                $('.photopage_comments').append(add);
+                $('textarea').val("");
+            })
+        })
+        
+    </script>
     
     <title>PhotoCritque: Bunny</title>
 </head>
