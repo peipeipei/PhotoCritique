@@ -15,9 +15,6 @@
 
         $(document).ready(function(){
 
-        $("#image").on("click", function(){
-            window.location="critique2.html"
-        })
         $(".comment").on("click", function(){
             var id = this.id
             $('.comment').each(function(i, obj) {
@@ -35,6 +32,11 @@
         $("#annotate").on("click", function(){
             $(this).attr("disabled", true);
         })
+		
+		$("#reply").on("click", function() {
+			var text = $("#reply_text").val();
+			$("#reply_wrapper").text(text);
+		})
 
         })
     </script>
@@ -48,14 +50,14 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-            <a class="navbar-brand" href="#">Aperature</a>
+            <a class="navbar-brand" href="#">Aperture</a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <<li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
-                <li><a href="#" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
+                <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
             </ul>
         </div>
@@ -68,7 +70,7 @@
 <div id = "photo">
     <h3>Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
-    <div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>
+    <!--<div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>-->
 </div>
 <div id = "comments">
     <h3>Focal Points</h3>
@@ -76,7 +78,7 @@
         These areas are in the shadow and I think they would look better if they were in light.<br/>
                 <span class = "glyphicon glyphicon-share-alt"></span>
         <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
-        <input type = "text" /><button id = "reply">Post reply</button>
+        <div id = "reply_wrapper"><input id = "reply_text" type = "text" /><button id = "reply">Post reply</button></div>
 
     </div>
     <div class = "comment" id = "comment_2">
