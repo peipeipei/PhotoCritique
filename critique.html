@@ -16,7 +16,8 @@
     	$(document).ready(function(){
             var offsetLeft = $("#photo").offset().left;
             var offsetTop = $("#photo").offset().top;
-            var current_id = 4;
+            var current_id = 3;
+            var circle_list = [];
 
         $("#image").on("click", function(e){
             if ($("#annotate").hasClass("active")){
@@ -32,6 +33,9 @@
                 img.style.position = "absolute"
                 img.style.left = xPos + "px";
                 img.style.top = yPos + "px";
+
+                circle_list[current_id].push(img);
+                console.log(circle_list);
 
                 $("#photo").append(img);
 
@@ -62,12 +66,15 @@
             $("#comments").append(comment);
 
             $(this).attr("disabled", true);
+
+            circle_list[current_id] = []
         })
 
         $(document).on("click", ".cancel", function() {
             var id = this.id.substring(7);
             $(".img_" + id).remove();
             $("#comment_" + id).remove();
+            circle_list[current_id] = [];
             current_id--;
 
             $("#annotate").removeClass("active");
@@ -105,9 +112,22 @@
                     if (photo_id < 4){
     				    $("#image").attr("src", "annotated_photos/cute-animals-group" + photo_id + ".jpg")
                     }
+                    else {
+                        $("#image").attr("src", "annotated_photos/cute-animals-group0.jpg");
+                        circle_list[photo_id].forEach(function(circle){
+                            circle.src = "circle.png"
+                        })
+                    }
     			}
     			else {
     				$("#" + obj.id).removeClass("active");
+
+                    // make circle group inactive if not selected
+                    if (photo_id >= 4){
+                        circle_list[photo_id].forEach(function(circle){
+                            circle.src = "circle-faded.png"
+                        })
+                    }
     			}
 			});
     	})
@@ -147,7 +167,15 @@
             </ul>
         </div>
     </nav>
-    
+
+<div id = "overall_container">    
+<div id = "inbox">
+<h1>Inbox</h1>
+<ul>
+<li>Messages</li>
+<li>My Critiques</li>
+</ul>
+</div>
 <div id = "container">
     <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
     <h2>Critiquer: pikachu</h2>
@@ -169,6 +197,7 @@
 	<div class = "comment" id = "comment_3">
 		I like how the background is blurred so the animals stand out.
 	</div>
+</div>
 </div>
 </div>
 

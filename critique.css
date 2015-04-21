@@ -1,4 +1,11 @@
+#inbox {
+	float: left;
+	padding: 20px;
+	background-color: #F0F2EB;
+}
+
 #container {
+	float:left;
 	margin-left:20px;
 }
 #photo {
@@ -30,6 +37,6 @@
 }
 
 textarea{
-    width:400px;
+    width:390px;
     border: 1px solid rgba(255,66,66,0.8);
 }
