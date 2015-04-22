@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" type="text/css" href="critique.css">
+    <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
         <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -55,7 +56,7 @@
             textarea.id = "text_" + current_id;
             $(comment).append(textarea);
 
-            var new_div = '<div><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle.png"></button><button class = "cancel btn btn-default pull-right" id = "cancel_' + current_id + '">Cancel</button><button class = "post btn btn-default pull-right" id = "post_' + current_id + '">Post Comment</button></div>'
+            var new_div = '<div class = "btn-toolbar"><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle-small.png"></button><button class = "cancel btn btn-danger pull-right" id = "cancel_' + current_id + '">Cancel</button><button class = "post btn btn-danger pull-right" id = "post_' + current_id + '">Post Comment</button></div>'
             //var post_comment = '<button class = "post btn btn-default pull-right" id = "post_' + current_id + '">Post Comment</button>'
             //var cancel = "<button class = 'cancel btn btn-default' id = 'cancel_" + current_id + "'>Cancel</button>"
 
@@ -114,6 +115,8 @@
                     }
                     else {
                         $("#image").attr("src", "annotated_photos/cute-animals-group0.jpg");
+
+                        // if circle group is selected, make it active
                         circle_list[photo_id].forEach(function(circle){
                             circle.src = "circle.png"
                         })
@@ -143,6 +146,10 @@
             }
         })
 
+        $("#send_message").on("click", function(){
+            window.location = "inbox.html";
+        })
+
     	})
     </script>
 </head>
@@ -155,34 +162,56 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-            <a class="navbar-brand" href="#">Aperture</a>
-        <div class="navbar-collapse collapse">
+        <!--<div class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
                 <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
-        </div>
+        <!--</div>-->
     </nav>
 
 <div id = "overall_container">    
 <div id = "inbox">
-<h1>Inbox</h1>
 <ul>
-<li>Messages</li>
-<li>My Critiques</li>
+<li><a href = "inbox.html" style="font-weight: bold">Inbox (5)</a></li>
+<li><a href = "#">Sent Critiques</a></li>
+<li><a href = "#">Drafts</a></li>
+<li><a href = "#">Starred</a></li>
 </ul>
 </div>
 <div id = "container">
-    <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
-    <h2>Critiquer: pikachu</h2>
+    <div style="border-bottom: 2px solid #FF4242; font-family: Trebuchet MS; font-size: 20px">
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 ">Subject: </label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" value = "Re: Bunny and Chicks">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 ">To: </label>
+    <div class="col-sm-10">
+      bunnymaster
+    </div>
+  </div>
+</form>
 </div>
 <div id = "photo">
-	<h3>Bunny and Chicks</h3>
+    <h3>Title: Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
+    <div>
+        <h3>Overall Comments:</h3>
+        <textarea style="width: 518px; height:150px">Great job! I really like the photo. Just work on a few things =)</textarea>
+        <div class="btn-toolbar"><button id = "send_message" class="btn btn-danger">Send</button> 
+        <button class="btn btn-default pull-right"><span title = "Delete" class="glyphicon glyphicon-trash"></span></button>
+        <button class="btn btn-default pull-right"><span title = "Save as Draft" class="glyphicon glyphicon-save"></span></button>
+    </div>
+    </div>
     <!--<div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
     <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>-->
 </div>

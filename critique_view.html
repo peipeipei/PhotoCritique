@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" type="text/css" href="critique.css">
+        <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
         <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -60,35 +61,45 @@
             </ul>
         </div>
     </nav>
-    
+
+<div id = "overall_container">    
+<div id = "inbox">
+<ul>
+<li><a href = "inbox.html">Inbox (5)</a></li>
+<li><a href = "#">My Critiques</a></li>
+<li><a href = "#">Drafts</a></li>
+<li><a href = "#">Starred</a></li>
+</ul>
+</div>
 <div id = "container">
     <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
-    <h2>Critiqued by: pikachu</h2>
+    <h2>Subject: Bunny and Chicks <span class="pull-right" style= "font-size: 12pt; color: black">2:31 pm</span></h2>
 </div>
 <div id = "photo">
-    <h3>Bunny and Chicks</h3>
+    <h3>Critiquer: pikachu</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
-    <!--<div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>-->
+    <!--<div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
+    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>-->
 </div>
 <div id = "comments">
-    <h3>Focal Points</h3>
+    <h3>Focal Points <button id = "add_comment" class = "btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button></h3>
     <div class = "comment active" id="comment_1">
-        These areas are in the shadow and I think they would look better if they were in light.<br/>
-                <a href = "critique_reply.html"><span class = "glyphicon glyphicon-share-alt"></span></a>
-        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+        These areas are in the shadow and I think they would look better if they were in light.
+        <div class="icons"><a href = "critique_reply.html"><span class = "glyphicon glyphicon-share-alt"></span></a>
+        <span class = "glyphicon glyphicon-thumbs-up"></span><br/></div>
     </div>
     <div class = "comment" id = "comment_2">
-        Great focus! I love how the whiskers and fur stand out!<br/>
-         <span class = "glyphicon glyphicon-share-alt"></span>
-        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+        Great focus! I love how the whiskers and fur stand out!
+        <div class = "icons"><span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span><br/></div>
     </div>
     <div class = "comment" id = "comment_3">
-        I like how the background is blurred so the animals stand out. <br/>
-         <span class = "glyphicon glyphicon-share-alt"></span>
-        <span class = "glyphicon glyphicon-thumbs-up"></span>
+        I like how the background is blurred so the animals stand out.
+        <div class="icons"><span class = "glyphicon glyphicon-share-alt"></span>
+        <span class = "glyphicon glyphicon-thumbs-up"></span></div>
+    </div>
 </div>
 </div>
-
-
+</div>
 </body>
 </html>

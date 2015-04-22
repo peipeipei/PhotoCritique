@@ -1,9 +1,10 @@
-#inbox {
-	float: left;
-	padding: 20px;
-	background-color: #F0F2EB;
+body {
+	background-color: #FCFCFC
 }
-
+#overall_container {
+	height: 100%;
+	position: absolute;
+}
 #container {
 	float:left;
 	margin-left:20px;

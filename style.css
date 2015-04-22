@@ -53,8 +53,16 @@ body{
     text-align: center;
     margin: auto;
     font-family: 'Redressed', cursive;
+
 }
 
+.navbar,
+.navbar li a {
+    line-height: 75px;
+    height: 75px;
+    padding-top: 0;
+    background-color: #F0F2EB;
+}
 
 
 

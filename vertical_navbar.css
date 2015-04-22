@@ -1,0 +1,28 @@
+#inbox {
+	position: relative;
+	top: -10px;
+	float: left;
+	width: 200px;
+	background-color: #F0F2EB;
+	min-height: 100%;
+	margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin-left:0;
+    padding: 0;
+}
+
+li a {
+    display: block;
+    font-size: 14pt;
+    color: black;
+    padding: 8px;
+}
+
+li a:hover {
+	background-color: #E6E6E6;
+	text-decoration: none;
+	color: black;
+}
