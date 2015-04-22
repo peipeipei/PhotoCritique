@@ -1,12 +1,19 @@
-h1 {
-    margin: 20px;
+body {
+	background-color: #FCFCFC
+}
+#overall_container {
+	height: 100%;
+	position: absolute;
+}
+#container {
+	float:left;
+	margin-left:20px;
 }
 
 .inbox_div table {
 	border: 1px solid lightgrey;
 	background-color: #eeeeee;
-	width: 90%;
-	margin: 20px;
+	width: 80%;
 }
 
 .inbox_div tr {

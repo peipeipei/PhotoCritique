@@ -3,12 +3,26 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="photopage.css">
     
     <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
-    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+     <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+  </style>
     <script type="text/javascript">
         $(document).ready(function(){
             $(".comment_button").on("click", function(){
@@ -17,7 +31,7 @@
                 var add = '<div class="a_comment">' + '<p class="username">' + user + '</p>' + '<div class="the_comment">' + comment + '</div></div>'
                 $('.photopage_comments').append(add);
                 $('textarea').val("");
-            })
+            });
             
             $(".like-button").on("click",function(){
                 if ($(this).hasClass("unliked")){
@@ -33,15 +47,20 @@
                     $(this).addClass("unliked");
                 }
             });
-        })
-        
+
+            $("#send-request").on("click", function() {
+              $("#myModal").modal('show');
+            })
+        });
+
+
     </script>
     
-    <title>Aperture: Bunny and Chicks</title>
+    <title>PhotoCritque: Bunny</title>
 </head>
     
 <body>
-    <nav class="navbar navbar-default" role="navigation">
+   <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -49,17 +68,17 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-            <a class="navbar-brand" href="#">Aperture</a>
-        <div class="navbar-collapse collapse">
+        <!--<div class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
                 <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
-        </div>
+        <!--</div>-->
     </nav>
     
     <div class="left">
@@ -67,10 +86,12 @@
             
         <div class="photopage_descrip">
             <p>Rawr rawr rawr</p>
+            <p>Photographer: <strong>bunnymaster</strong></p>
         </div>
         
         <div class="comment_area">
-            <textarea></textarea>
+            <textarea>
+            </textarea>
             
             <div class="comment_btn_area">
                 <button class="btn comment_button">Comment</button>
@@ -100,9 +121,9 @@
     <div class="right">
         
         <div class="button_area">
-            <a href = "critique.html"><span class="glyphicon glyphicon-envelope"> </span></a>
-            <span class="glyphicon glyphicon-heart-empty"> </span>
-            <span class="glyphicon glyphicon-new-window"> </span>
+            <a href = "critique.html"><button id = "critique" title="Critique this Photo" class="btn btn-default"><span class="glyphicon glyphicon-envelope" > </span></button></a>
+            <button id = "like" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty like-button unliked"> </span></button>
+            <button id = "send-request" title = "Send a request" class="btn btn-default"><span class="glyphicon glyphicon-new-window"> </span></button>
         </div>
         
         <div class="camera_info">
@@ -138,10 +159,63 @@
         
     </div>
     
-    <div>
-        
-    </div>
+    <!--<div class="overlay">
+        <div class="form-style">
+            <h2>Submit a Request</h2>
+            <form>
+                <input type="text" name="field1" placeholder="Critiquer's Username" />
+                <input type="email" name="field2" placeholder="Email" />
+                <input type="url" name="field3" placeholder="Website" />
+                <textarea class="overlay-textarea" placeholder="Message" onkeyup="adjust_textarea(this)"></textarea>
+                <input type="button" value="Send Request" />
+            </form>
+        </div>
+    </div>-->
 
-    
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Send a Request</h4>
+            </div>
+            <div class="modal-body">
+                <!--<p>Do you want to save changes you made to document before closing?</p>
+                <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>-->
+                           <form>
+                <div class = "form-group">
+                  <input type="text" class="form-control" name="field1" placeholder="Critiquer's Username" />
+                </div>
+
+                <div class = "form-group">
+                  <input type="email" class="form-control" name="field2" placeholder="Email" />
+                </div>
+
+                <div class = "form-group">
+                  <input type="url" class="form-control" name="field3" placeholder="Website" />
+                </div>
+
+                <div class = "form-group">
+                  <textarea class = "form-control" name="field4" placeholder = "Message"></textarea>
+                </div>
+                <!--<textarea class="overlay-textarea" placeholder="Message" onkeyup="adjust_textarea(this)"></textarea>-->
+            </form> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        //this currently only works down here....
+        //auto expand textarea
+        function adjust_textarea(h) {
+            h.style.height = "20px";
+            h.style.height = (h.scrollHeight)+"px";
+        }
+    </script>
 </body>
 </html>
