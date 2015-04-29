@@ -44,3 +44,9 @@ textarea{
     width:390px;
     border: 1px solid rgba(255,66,66,0.8);
 }
+
+.tooltip-inner {
+    max-width: 250px;
+    width: 250px; 
+    text-align: left;
+}
