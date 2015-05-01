@@ -166,11 +166,79 @@
             })
         })
 
+        $(document).on("click", ".edit", function(){
+            var id = this.id.substring(5);
+            var text = ""
+            commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
+                 snapshot.forEach(function(data) {
+                    text = data.val().text;
+
+
+            var comment = document.createElement("div");
+            $(comment).addClass("comment");
+            comment.id = "comment_edit_" + id;
+
+            var textarea = '<textarea id="text_' + id + '">' + text + '</textarea>'
+            $(comment).append(textarea);
+
+            var new_div = '<div class = "btn-toolbar"><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle-small.png"></button><button class = "cancel_edit btn btn-danger pull-right" id = "cancel_edit_' + id + '">Cancel</button><button class = "edit_comment btn btn-danger pull-right" id = "edit_comment_' + id + '">Edit Comment</button></div>'
+
+            $(comment).append(new_div);
+
+            $("#comment_" + id).replaceWith(comment);
+
+            $(comment).addClass("active");
+            //$("#comments").append(comment);
+
+            $(this).attr("disabled", true);
+
+                })
+            });
+
+        })
+
+        $(document).on("click", ".edit_comment", function(){
+            var id = this.id.substring(13);
+            var text = $("#text_" + id).val();
+            commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
+                console.log(snapshot)
+                 snapshot.forEach(function(data) {
+                    var key = data.key();
+                    commentsRef.child(key).update({text: text});
+                })
+
+                var comment = getComment("comment_" + id, text); 
+                $("#comment_edit_" + id).replaceWith(comment);
+
+            });   
+        })
+
+        $(document).on("click", ".cancel_edit", function(){
+            var id = this.id.substring(12);
+
+            commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
+                 snapshot.forEach(function(data) {
+                    text = data.val().text;
+                })
+
+                var comment = getComment("comment_" + id, text); 
+                $("#comment_edit_" + id).replaceWith(comment);
+            });
+        })
+
+        function getComment(commentID, msg){
+            var comment = document.createElement("div");
+            $(comment).addClass("comment");
+            comment.id = commentID;
+            $(comment).append(msg);
+
+            return $(comment);
+        }
+
         function displayComment(commentID, msg){
             var comment = document.createElement("div");
             $(comment).addClass("comment");
             comment.id = commentID;
-            //icons = '<span id="delete_' + commentID.substring(8) + '" class="delete glyphicon glyphicon-remove"></span>'
             $(comment).append(msg);
 
             $("#comments").append(comment);  
@@ -201,8 +269,13 @@
 
         function activate(id, state){
             $('.comment').each(function(i, obj) {
-                photo_id = obj.id.substring(8);
-                if (id === photo_id){
+                var photo_id = obj.id.substring(8);
+                if (photo_id.length > 5){
+                    photo_id = photo_id.substring(5);
+                }
+
+                console.log(circle_list)
+                if (id === photo_id || "edit_" + id === photo_id){
                     if (state != "none"){
                         $("#" + obj.id).addClass(state);
                         circle_list[photo_id].forEach(function(circle){
@@ -225,7 +298,6 @@
                 }
                 else {
                     $("#" + obj.id).removeClass(state);
-
                     if (!$(this).hasClass("active")){
                         circle_list[photo_id].forEach(function(circle){
                             circle.src = "circle-faded.png"
@@ -247,6 +319,7 @@
         $(document).on("click", ".circle", function(){
             var id = this.className.substring(11);
             activate(id, "active");
+            addIcons("comment_" + id)
         })
 
         $(document).on("mouseover", ".comment", function(){
