@@ -1,0 +1,125 @@
+.top{
+	background-color: black;
+	height: 50px;
+	margin-bottom:5px;
+}
+
+.bot{
+	background-color:purple;
+	height:30px;
+	font-size:20px;
+	color:white;
+}
+
+.bot div{
+	text-align: center;
+	font-family: 'Philosopher', sans-serif;
+}
+
+.bot div{
+	padding: 0px;
+ 	border-left: white solid 5px;
+}
+
+.bot div:first-child{
+	border:none;
+}
+
+#logo{
+	position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: auto;
+    font-family: 'Redressed', cursive;
+    color:white;
+    font-size:36px;
+}
+
+.not-header{
+	margin-left:20px;
+	margin-right:20px;
+	margin-bottom:20px;
+	padding-top:20px;
+}
+
+.r-request{
+	width:90%;
+	margin-left: auto ;
+  	margin-right: auto ;
+  	border:solid 1px #dddddd;
+  	padding:5px;
+}
+
+table, tr{
+	width:100%;
+}
+
+td{
+	padding:1px;
+}
+
+.photo{
+	width:20%;
+	text-align: center;
+}
+
+.user{
+	width:20%;
+}
+
+.friend-status{
+	width:8%;
+}
+
+.title-tags{
+	width:40%;
+}
+
+.date{
+	width:8%;
+}
+
+.delete{
+	width:12%;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.checkRemove{
+	height: 78px;
+	text-align: center;
+	margin: -8px 0px -8px 8px;
+}
+
+.yesDelete{
+	width:50%;
+	background-color:red;
+}
+
+.noDelete{
+	width:50%;
+	background-color:#FFCC11;
+}
+
+
+
+
+
+/*.isFriend{
+	color:#66CD00;
+}
+
+.notFriend{
+	font-size:0.75em;
+	color:darkgrey;
+}
+
+.notFriend:nth-child(2){
+	left:-6px;
+
+}*/
+
+
+
+

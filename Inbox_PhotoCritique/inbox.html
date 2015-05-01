@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	    <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>	   
+		<link rel="stylesheet" type="text/css" href="inbox.css">
+
+		<script>
+			$(document).ready(function() {
+
+				$('.checkRemove').hide(); 
+				$(".remove").click(function() {
+					$(this).hide();   
+					$('.checkRemove').slideToggle(500);
+				});
+				$(".yesDelete").click(function(){
+					$()
+				});
+			});
+
+		</script>
+	</head>
+
+	<body>
+
+		<div class="header">
+
+			<div class="top">
+				<div class="col-md-4" id="left-header">
+					
+				</div>
+
+				<div class="col-md-4" id="mid-header">
+					<p id="logo">aperture</p>
+				</div>
+
+				<div class="col-md-4" id="right-header">
+					
+				</div>
+			</div>
+
+			<div class="bot">
+				<div class="col-md-4" id="from-others">
+					<p>Received Requests</p>
+				</div>
+
+				<div class="col-md-4" id="from-you">
+					<p>Your Requests</p>
+				</div>
+
+				<div class="col-md-4" id="your-critiques">
+					<p>Critiqued</p>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="not-header">
+
+			<div class="received-request">
+
+				<div class="r-request">
+					<table>
+						<tr>
+							<td class="photo">
+								<img src = "ocean.jpg" style="height:64px;"/>
+							</td>
+							<td class="user">
+								<p class="username">John Smith</p>
+							</td>
+							<!-- <td class="friend-status">
+								<span class="glyphicon glyphicon-user isFriend"></span>
+							</td> -->
+							<td class="title-tags">
+								<span class="title">Into the Pacific</span>
+								<p class="tags">focus, lighting, composition</p>
+							</td>
+							<td class="date">
+								11:30 PM
+							</td>
+							<td class="delete">
+								<p class="glyphicon glyphicon-remove remove"></p>
+
+								<table class="checkRemove">
+									<tr>
+										<td class="yesDelete"><p class="glyphicon glyphicon-trash"></p></td>
+										<td class="noDelete"><p class="glyphicon glyphicon-minus"></p></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="r-request">
+					<table>
+						<tr>
+							<td class="photo">
+								<img src = "lighthouse.jpg" style="height:64px;"/>
+							</td>
+							<td class="user">
+								<p class="username">Jane Johnson</p>
+							</td>
+							<!-- <td class="friend-status">
+								<span class="glyphicon glyphicon-user notFriend"></span>
+								<span class="glyphicon glyphicon-user notFriend"></span>
+								<span class="notFriend">10<span>
+							</td> -->
+							<td class="title-tags">
+								<span class="title">The Lighthouse</span>
+								<p class="tags">color balance, lighting, composition</p>
+							</td>
+							<td class="date">
+								8:12 AM
+							</td>
+							<td class="delete">
+								<p class="glyphicon glyphicon-remove remove"></p>
+
+								<table class="checkRemove">
+									<tr>
+										<td class="yesDelete"><p class="glyphicon glyphicon-trash"></p></td>
+										<td class="noDelete"><p class="glyphicon glyphicon-minus"></p></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+
+</html>
