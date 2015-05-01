@@ -1,4 +1,12 @@
+body {
+	background-color: #FCFCFC
+}
+#overall_container {
+	height: 100%;
+	position: absolute;
+}
 #container {
+	float:left;
 	margin-left:20px;
 }
 #photo {
@@ -21,15 +29,24 @@
 	border: 1px solid lightgrey;
 }
 
-.comment:hover{
+/*.comment:hover{
     background-color: #F0F2EB ;
-}
+}*/
 
+.hover{
+    background-color: #F0F2EB ;	
+}
 .active {
 	background-color:rgba(212,238,94,0.5);
 }
 
 textarea{
-    width:400px;
+    width:390px;
     border: 1px solid rgba(255,66,66,0.8);
+}
+
+.tooltip-inner {
+    max-width: 250px;
+    width: 250px; 
+    text-align: left;
 }

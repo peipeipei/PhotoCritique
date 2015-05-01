@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="photopage.css">
     <link rel="stylesheet" type="text/css" href="critique.css">
+        <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
         <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -48,47 +49,74 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-            <a class="navbar-brand" href="#">Aperture</a>
-        <div class="navbar-collapse collapse">
+        <!--<div class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
                 <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
-        </div>
+        <!--</div>-->
     </nav>
-    
+
+<div id = "overall_container">    
+<div id = "inbox">
+<ul>
+<li><a href = "inbox.html" style="font-weight: bold">Inbox (5)</a></li>
+<li><a href = "#">Sent Critiques</a></li>
+<li><a href = "critique.html">Drafts</a></li>
+<li><a href = "#">Starred</a></li>
+</ul>
+</div>
 <div id = "container">
-    <div style="border-bottom: 2px solid #b2cc3c; color: #FF4242;">
-    <h2>Critiqued by: pikachu</h2>
+    <div style="border-bottom: 2px solid #FF4242; font-family: Trebuchet MS; font-size: 20px">
+    <form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 ">Subject: </label>
+    <div class="col-sm-10">
+      Bunny and Chicks
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 ">From: </label>
+    <div class="col-sm-10">
+      pikachu
+    </div>
+  </div>
+</form>
 </div>
 <div id = "photo">
-    <h3>Bunny and Chicks</h3>
+        <h3>Title: Bunny and Chicks</h3>
     <img id = "image" src="annotated_photos/cute-animals-group1.jpg" style="width:512px;"/>
-    <!--<div><button id = "annotate" title = "Add annotation"><img src="circle.png"></button><button id = "group" title = "Group circles"><img src="circle-group.png"></button></div>-->
+        <div>
+        <h3>Overall Comments:</h3>
+        Great job! I really like the photo. Just work on a few things =)
+        <h3>Reply:</h3>
+        <textarea style="width: 518px; height:150px">Thanks for your feedback!</textarea>
+        <div class="btn-toolbar"><button id = "send_message" class="btn btn-danger">Send</button> 
+        <button class="btn btn-default pull-right"><span title = "Delete" class="glyphicon glyphicon-trash"></span></button>
+        <button class="btn btn-default pull-right"><span title = "Save as Draft" class="glyphicon glyphicon-save"></span></button>
+    </div>
+</div>
+    <!--<div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
+    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>-->
 </div>
 <div id = "comments">
     <h3>Focal Points</h3>
     <div class = "comment active" id="comment_1">
-        These areas are in the shadow and I think they would look better if they were in light.<br/>
-                <a href = "critique_reply.html"><span class = "glyphicon glyphicon-share-alt"></span></a>
-        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+        These areas are in the shadow and I think they would look better if they were in light.
     </div>
     <div class = "comment" id = "comment_2">
-        Great focus! I love how the whiskers and fur stand out!<br/>
-         <span class = "glyphicon glyphicon-share-alt"></span>
-        <span class = "glyphicon glyphicon-thumbs-up"></span><br/>
+        Great focus! I love how the whiskers and fur stand out!
     </div>
     <div class = "comment" id = "comment_3">
-        I like how the background is blurred so the animals stand out. <br/>
-         <span class = "glyphicon glyphicon-share-alt"></span>
-        <span class = "glyphicon glyphicon-thumbs-up"></span>
+        I like how the background is blurred so the animals stand out.
+    </div>
 </div>
 </div>
-
-
+</div>
 </body>
 </html>

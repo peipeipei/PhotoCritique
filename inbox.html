@@ -3,8 +3,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="inbox.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="inbox.css">
+    <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
     <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
      
@@ -19,22 +20,31 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-            <a class="navbar-brand" href="#">Aperture</a>
-        <div class="navbar-collapse collapse">
+        <!--<div class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile">Username</a></li>
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
                 <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
-        </div>
+        <!--</div>-->
     </nav>
-    
+
+<div id = "overall_container">
+    <div id = "inbox">
+<ul>
+<li><a href = "inbox.html" style="font-weight: bold; background-color:#E6E6E6">Inbox (5)</a></li>
+<li><a href = "">Sent Critiques</a></li>
+<li><a href = "critique.html">Drafts</a></li>
+<li><a href = "#">Starred</a></li>
+</ul>
+</div>
+<div class = "container">
     <div class="inbox_div">
-    
-        <h1>Inbox</h1>
+        <h2>Inbox</h2>
         <table>
             <tr class = "unread"><td  width = 20%><a href = "critique_view.html"><span class="glyphicon glyphicon-remove"></span> pikachu</a></td>
                 <td  width = 60%><a href = "critique_view.html">Bunny and Chicks</a></td>
@@ -58,7 +68,9 @@
         </table>
         
     </div>
-
+</div>
+</div>
+</div>
 
     
 </body>
