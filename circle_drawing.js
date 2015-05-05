@@ -135,6 +135,8 @@
 		// Listen for mousedown on photo
         $("#photo-wrapper").mousedown(function(e) {
 			// Check for active drawing and don't count clicks on existing circles
+
+			console.log(circleHover);
 			if (!drawable || circleHover) {
 				return;
 			}
@@ -165,7 +167,7 @@
 				// If valid circle drawn, save it
                 var distance = euclidDist(origin.left, origin.top, left, top);
 				if (distance > 2 * OUTLINE_SIZE + STROKE_SIZE) {
-					var circleObject = saveCircle(origin.left, origin.top, distance, null, "div_" + current_id);
+					var circleObject = saveCircle(origin.left, origin.top, distance, null, "div_" + this_id);
 					setCircleActive(circleObject);
 				}
 				
