@@ -29,13 +29,13 @@ body {
 	border: 1px solid lightgrey;
 }
 
-/*.comment:hover{
+.comment:hover{
     background-color: #F0F2EB ;
-}*/
-
-.hover{
-    background-color: #F0F2EB ;	
 }
+
+/*.hover{
+    background-color: #F0F2EB ;	
+}*/
 .active {
 	background-color:rgba(212,238,94,0.5);
 }

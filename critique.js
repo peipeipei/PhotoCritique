@@ -1,11 +1,12 @@
 var annotationsRef = new Firebase("https://6813-aperture.firebaseio.com/annotations");
 var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/comments");
 
+var drawable = false;
+var current_id = 0;
+
 $(document).ready(function(){
             var offsetLeft = $("#photo").offset().left;
             var offsetTop = $("#photo").offset().top;
-            var current_id = 0;
-            var circle_list = [];
 
             // display tooltip for instructions
             $('[data-toggle="tooltip"]').tooltip({
@@ -17,77 +18,47 @@ $(document).ready(function(){
                 snapshot.forEach(function(data) {
                     var annotation = data.val();
 
-                    if (annotation.currentID > current_id){
-                        current_id = annotation.currentID;
+                    // create new div for different groups - there is an issue with the last circle added.
+                    // the last circle always appears active and when I delete the entire div, that circle doesn't
+                    // get deleted for some reason
+                    if (annotation.currentID != current_id){
+                        current_id ++;
+                        var div = document.createElement("div");
+                        div.id = "div_" + current_id;
+                        div.className = "circle-group";
+                        $("#photo-wrapper").append(div);
                     }
-                    displayCircle(annotation.className, data.key(), annotation.left, annotation.top, annotation.currentID);
+
+                    var canvas = document.getElementById("drawing-canvas");
+                    var context = canvas.getContext('2d');
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+
+                    drawCircle(context, annotation.originX, annotation.originY, annotation.radius);
+                    saveInactiveCircle(annotation.originX, annotation.originY, annotation.radius, data.key());
                 })
+
+                // make circles not draggable initially 
+                $(".circle").draggable({disabled :true});
             });
 
             commentsRef.once("value", function(snapshot){
                 snapshot.forEach(function(data){
                     var comment = data.val();
-                    var c = getComment(comment.commentID, comment.text);
+                    var c = getComment("comment_" + comment.currentID, comment.text);
                     $("#comments").append(c);
                 })
             });
 
-            // display circles by setting their positions
-            function displayCircle(className, id, xPos, yPos, current){
-                var img = document.createElement("img");
-                img.className = className;
-                img.src = "circle-faded.png";
-                img.id = id;
-
-                img.style.position = "absolute"
-                img.style.left = xPos + "px";
-                img.style.top = yPos + "px";
-
-                if (!circle_list[current]){
-                    circle_list[current] = []
-                }
-                circle_list[current].push(img);
-
-                $("#photo").append(img);
-
-                $(".circle").draggable({disabled: true});
-            }
-
-            // if you click on image, it will add an annotation there
-            $("#image").on("click", function(e){
-                if ($("#annotate").hasClass("active")){
-                    var img = document.createElement("img");
-                    img.className = "circle img_" + current_id;
-                    img.src = "circle.png";
-                    var w = img.width;
-
-                    // center image on mouse click
-                    xPos = e.pageX - offsetLeft - w/2;
-                    yPos = e.pageY - offsetTop - w/2;
-
-                    img.style.position = "absolute"
-                    img.style.left = xPos + "px";
-                    img.style.top = yPos + "px";
-
-                    circle_list[current_id].push(img);
-
-                    $("#photo").append(img);
-
-                    // add annotation to firebase
-                    var annotationRef = annotationsRef.push({
-                        className: img.className,
-                        currentID: current_id,
-                        radius: w,
-                        left: xPos,
-                        top: yPos
-                    });
-                    img.id = annotationRef.key(); 
-                }
-            })
-
             // when add comment is clicked, allow user to type a comment and add annotations
             $("#add_comment").on("click", function(){
                 current_id++;
+                drawable = true;
+                var div = document.createElement("div");
+                div.id = "div_" + current_id;
+                div.className = "circle-group";
+                $("#photo-wrapper").append(div);
+
+                // add comment div
                 var comment = document.createElement("div");
                 $(comment).addClass("comment");
                 comment.id = "comment_" + current_id;
@@ -96,32 +67,31 @@ $(document).ready(function(){
                 textarea.id = "text_" + current_id;
                 $(comment).append(textarea);
 
-                var new_div = '<div class = "btn-toolbar"><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle-small.png"></button><button class = "cancel btn btn-danger pull-right" id = "cancel_' + current_id + '">Cancel</button><button class = "post btn btn-danger pull-right" id = "post_' + current_id + '">Post Comment</button></div>'
+                // add post comment and cancel buttons
+                var new_div = '<div class = "btn-toolbar"><button class = "cancel btn btn-danger pull-right" id = "cancel_' + current_id + '">Cancel</button><button class = "post btn btn-danger pull-right" id = "post_' + current_id + '">Post Comment</button></div>'
 
                 $(comment).append(new_div);
 
                 $("#comments").append(comment);
 
+                // disable add_comment button
                 $(this).attr("disabled", true);
-
-                circle_list[current_id] = []
             })
 
             // cancel a comment
             $(document).on("click", ".cancel", function() {
+                drawable = false;
                 var id = this.id.substring(7);
-                $(".img_" + id).remove();
+                $("#div_" + id).remove();
                 $("#comment_" + id).remove();
-                circle_list[current_id] = [];
-                current_id--;
 
-                $("#annotate").removeClass("active");
-                $(document.body).css({'cursor' : 'default'}); 
                 $("#add_comment").attr("disabled", false);
             })
 
             // post a comment
             $(document).on("click", ".post", function() {
+                drawable = false;
+
                 var id = this.id.substring(5);
                 var msg = $("#text_" + id).val();
                 $("#comment_" + id).remove();
@@ -129,20 +99,44 @@ $(document).ready(function(){
                 var comment = getComment("comment_" + id, msg);
                 $("#comments").append(comment);
 
-                addIcons("comment_" + id)
-                $("#comment_" + id).addClass("active");
-
-                $("#annotate").removeClass("active");
-                $(document.body).css({'cursor' : 'default'});  
+                activate2(id)
+  
                 $("#add_comment").attr("disabled", false);
 
-                $(".circle").draggable({disabled: true});
+                $("#div_" + id).children().each(function (){
+                    $(this).draggable("disable");
+                })
+
+                // add each circle to firebase
+            $("#div_" + current_id).children().each(function (){
+                var radius = $(this).context.width / 2;
+                var left = $(this).context.style.left;
+                var top = $(this).context.style.top;
+
+                var centerX = parseInt(left) + radius;
+                var centerY = parseInt(top) + radius;
+
+                var annotationRef = annotationsRef.push({
+                    currentID: current_id,
+                    radius: radius,
+                    originX: centerX,
+                    originY: centerY
+                });
+
+                // set id of circle equal to firebase autogenerated id
+                $(this).attr("id", annotationRef.key()); 
+            })
 
                 // add finished comment to firebase
                 commentsRef.push({
-                    commentID: "comment_" + id,
+                    currentID: parseInt(id),
                     text: msg,
                 });
+
+                var allCircles = $(".circle");
+                allCircles.removeClass("circle");
+                allCircles.addClass("inactive");
+                allCircles.off("mouseenter mouseleave");
 
             })
 
@@ -150,10 +144,11 @@ $(document).ready(function(){
             $(document).on("click", ".delete", function(){
                 var id = this.id.substring(7);
                 $("#comment_" + id).remove();
-                $(".img_" + id).remove();
+
+                $("#div_" + id).remove();
 
                 // search for comment to be deleted and delete from firebase
-                commentsRef.orderByChild("commentID").equalTo("comment_" + id).on("value", function(snapshot) {
+                commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                      snapshot.forEach(function(data) {
                         var key = data.key();
                         commentsRef.child(key).remove();
@@ -161,7 +156,7 @@ $(document).ready(function(){
                 });
 
                 // same thing for annotations
-                annotationsRef.orderByChild("className").equalTo("circle img_" + id).on("value", function(snapshot){
+                annotationsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot){
                     snapshot.forEach(function(data){
                         var key = data.key();
                         annotationsRef.child(key).remove();
@@ -171,14 +166,23 @@ $(document).ready(function(){
 
             // when you click on pencil, makes textarea appear
             $(document).on("click", ".edit", function(){
+                // for some reason when you try to move a circle, it also draws a new circle =(
+                drawable = true;
                 var id = this.id.substring(5);
                 var text = ""
 
-                commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
+                // make circles with correct id draggable -- for some reason, one of them duplicates instead of moves
+                // some of them also draw an extra circle
+                $("#div_" + id).children().each(function (){
+                    $(this).draggable("enable");
+                })
+                // search for comment with specified id in firebase
+                commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                      snapshot.forEach(function(data) {
+                        console.log(data)
                         text = data.val().text;
 
-
+                    // create textarea for user to edit comment
                     var comment = document.createElement("div");
                     $(comment).addClass("comment");
                     comment.id = "comment_edit_" + id;
@@ -186,7 +190,7 @@ $(document).ready(function(){
                     var textarea = '<textarea id="text_' + id + '">' + text + '</textarea>'
                     $(comment).append(textarea);
 
-                    var new_div = '<div class = "btn-toolbar"><button id = "annotate" class = "annotate btn btn-default" title = "Add annotation"><img src="circle-small.png"></button><button class = "cancel_edit btn btn-danger pull-right" id = "cancel_edit_' + id + '">Cancel</button><button class = "edit_comment btn btn-danger pull-right" id = "edit_comment_' + id + '">Edit Comment</button></div>'
+                    var new_div = '<div class = "btn-toolbar"><button class = "cancel_edit btn btn-danger pull-right" id = "cancel_edit_' + id + '">Cancel</button><button class = "edit_comment btn btn-danger pull-right" id = "edit_comment_' + id + '">Edit Comment</button></div>'
 
                     $(comment).append(new_div);
 
@@ -196,13 +200,6 @@ $(document).ready(function(){
 
                     $(this).attr("disabled", true);
 
-                    // allow annotations to be dragged
-                    circle_list[id].forEach(function(circle){
-                        $(circle).draggable("enable");
-                        // change image to move icon
-                        $(circle).attr("src", "circle-move.png")
-                    })
-
                     })
                 });
 
@@ -210,38 +207,81 @@ $(document).ready(function(){
 
         // save edited stuff to firebase
         $(document).on("click", ".edit_comment", function(){
+            drawable = false;
             var id = this.id.substring(13);
             var text = $("#text_" + id).val();
 
+            // make circles with id not draggable
+            $("#div_" + id).children().each(function (){
+                $(this).draggable("disable");
+            })
+
             // update text of comment
-            commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
-                console.log(snapshot)
+            commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                  snapshot.forEach(function(data) {
                     var key = data.key();
                     commentsRef.child(key).update({text: text});
                 })
 
                 var comment = getComment("comment_" + id, text); 
+
+                // replace edit comment with textarea with a regular comment
                 $("#comment_edit_" + id).replaceWith(comment);
 
-                // update positions of annotations
-                annotationsRef.orderByChild("className").equalTo("circle img_" + id).once("value", function(snapshot){
+                // remove old annotations
+                annotationsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot){
                     snapshot.forEach(function(data2){
-                        var key2 = data2.key();
-                        var left = parseInt(document.getElementById(key2).style.left);
-                        var top = parseInt(document.getElementById(key2).style.top);
-                        annotationsRef.child(key2).update({left: left, top: top});
+                        var key = data2.key();
+
+                        var radius = document.getElementById(key).width / 2;
+                        var left = document.getElementById(key).style.left;
+                        var top = document.getElementById(key).style.top;
+
+                        var centerX = parseInt(left) + radius;
+                        var centerY = parseInt(top) + radius;                        
+
+                        annotationsRef.child(key).update({radius: radius, originX: centerX, originY: centerY});
                     })
                 })
 
+
+                // add new annotations, need to not add duplicates
+                $("#div_" + id).children().each(function (){
+                    var radius = $(this).context.width / 2;
+                    var left = $(this).context.style.left;
+                    var top = $(this).context.style.top;
+
+                    var centerX = parseInt(left) + radius;
+                    var centerY = parseInt(top) + radius;
+
+                    var annotationRef = annotationsRef.push({
+                        currentID: id,
+                        radius: radius,
+                        originX: centerX,
+                        originY: centerY
+                    });
+                    // set id of circle equal to firebase autogenerated id
+                    $(this).attr("id", annotationRef.key()); 
+            })
+
+
             });   
+
+
         })
 
         // cancel an edit
         $(document).on("click", ".cancel_edit", function(){
             var id = this.id.substring(12);
+            drawable = false;
 
-            commentsRef.orderByChild("commentID").equalTo("comment_" + id).once("value", function(snapshot) {
+            // make circles with id not draggable
+            $("#div_" + id).children().each(function (){
+                $(this).draggable("disable");
+            })
+
+            // set text of comments equal to old text
+            commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                  snapshot.forEach(function(data) {
                     text = data.val().text;
                 })
@@ -249,6 +289,23 @@ $(document).ready(function(){
                 var comment = getComment("comment_" + id, text); 
                 $("#comment_edit_" + id).replaceWith(comment);
 
+
+                // clear contents of div to remove newly drawn/moved circles
+                $( "#div_" + id ).empty();
+
+                // add original circles back
+                annotationsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
+                    snapshot.forEach(function(data) {
+                        var annotation = data.val();
+
+                        var canvas = document.getElementById("drawing-canvas");
+                        var context = canvas.getContext('2d');
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+
+                        drawCircle(context, annotation.originX, annotation.originY, annotation.radius);
+                        saveCircle(annotation.originX, annotation.originY, annotation.radius);
+                    })
+                });
             });
         })
 
@@ -281,87 +338,53 @@ $(document).ready(function(){
         }
 
         // activate comment that is clicked on or hovered and deactivate others
-        function activate(id, state){
-            $('.comment').each(function(i, obj) {
-                var photo_id = obj.id.substring(8);
-                if (photo_id.length > 5){
-                    photo_id = photo_id.substring(5);
+        function activate2(id){
+            $(".comment").each(function(i, obj){
+                var comment_id = obj.id.substring(8);
+
+                // activate comment and circles
+                if (id === comment_id){
+                    $("#comment_" + id).addClass("active");
+                    addIcons("comment_" + id)
+                    
+                    $("#div_" + id).children().each(function (){
+                        $(this).removeClass("inactive")
+                        $(this).addClass("draggable");
+                    })
                 }
-                if (id === photo_id || "edit_" + id === photo_id){
-                    if (state != "none"){
-                        $("#" + obj.id).addClass(state);
-                        circle_list[photo_id].forEach(function(circle){
-                            circle.src = "circle.png"
-                            //$(circle).draggable("enable");
-                        })
-                    }
-                    else{
-                       $("#" + obj.id).removeClass("hover");
-                        if ($(this).hasClass("active")){
-                            circle_list[photo_id].forEach(function(circle){
-                                circle.src = "circle.png"
-                            })
-                        }
-                        else {
-                            circle_list[photo_id].forEach(function(circle){
-                                circle.src = "circle-faded.png"
-                            })    
-                        }
-                    }
-                }
+                //deactivate all other comments
                 else {
-                    $("#" + obj.id).removeClass(state);
-                    if (!$(this).hasClass("active")){
-                        circle_list[photo_id].forEach(function(circle){
-                            circle.src = "circle-faded.png"
-                        })
-                    }
+                    $("#comment_" + comment_id).removeClass("active");
+
+                    $("#div_" + comment_id).children().each(function (){
+                        $(this).addClass("inactive");
+                        $(this).removeClass("draggable")
+                    })
                 }
-            });  
+            })
+
         }
 
-        $(document).on("mouseover", ".circle", function(){
+        /*$(document).on("mouseover", ".circle", function(){
             var id = this.className.split(' ')[1].substring(4);
-            activate(id, "hover");
+            //activate(id, "hover");
         })
 
         $(document).on("mouseout", ".circle", function(){
             var id = this.className.split(' ')[1].substring(4);
-            activate(id, "none");
-        })
+            //activate(id, "none");
+        })*/
 
         $(document).on("click", ".circle", function(){
-            var id = this.className.split(' ')[1].substring(4);
-            activate(id, "active");
-            addIcons("comment_" + id)
-        })
-
-        $(document).on("mouseover", ".comment", function(){
-            var id = this.id.substring(8);
-            activate(id, "hover");
+            var parent_id = $(this).parent().attr("id")
+            var id = parent_id.substring(4);
+            activate2(id);
         })
 
     	$(document).on("click", ".comment", function(){
     		var id = this.id.substring(8)
-            activate(id, "active");
-            addIcons(this.id);
+            activate2(id);
     	})
-
-        $(document).on("mouseout", ".comment", function(){
-            var id = this.id.substring(8)
-            activate(id, "none");
-        })
-
-        $(document).on("click", "#annotate", function(){
-            if ($(this).hasClass("active")){
-                $(this).removeClass("active");
-                $(document.body).css({'cursor' : 'default'});     
-            }
-            else {
-                $(this).addClass("active");
-                $(document.body).css({'cursor' : 'url("circle.png"), auto'});     
-            }
-        })
 
         $("#send_message").on("click", function(){
             window.location = "inbox.html";
