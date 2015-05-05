@@ -39,8 +39,13 @@
 	}
 	
 	// Save a circle to its own canvas
-	var saveCircle = function(originX, originY, radius) {
-		var circleID = "" + originX + "-" + originY;
+	// Returns the jQuery object for the circle
+	var saveCircle = function(originX, originY, radius, circleID, groupID) {
+		if (!circleID) {
+			circleID = "" + originX + "-" + originY;
+		}
+		
+		console.log("Saving circle with ID " + circleID);
 		
 		$("<canvas>").attr({
 			id: circleID,
@@ -54,7 +59,7 @@
 			top: (originY - radius) + "px",
 			left: (originX - radius) + "px",
 			zIndex: "100"
-		}).appendTo("#div_" + current_id);
+		}).appendTo("#" + groupID);
 		
 		var canvas = document.getElementById(circleID);
 		var context = canvas.getContext('2d');
@@ -62,54 +67,14 @@
 		drawCircle(context, radius, radius, radius);
 		
 		var circleObject = $("#" + circleID);
-		
-		circleObject.hover(
-			function(e) {
-				circleHover = true;
-				circleObject.addClass("draggable");
-				$(document).keydown(function(e) {
-					// 8 = backspace, 46 = delete
-					if (e.keyCode == 8 || e.keyCode == 46) {
-						circleObject.remove();
-						circleHover = false;
-					}
-				});
-			},
-			function(e) {
-				circleHover = false;
-				circleObject.removeClass("draggable");
-				$(document).off("keydown");
-			}
-		);
-		
 		circleObject.draggable();
+		
+		console.log("Circle saved");
+		return circleObject;
 	}
-
-		// Save a circle to its own canvas
-	var saveInactiveCircle = function(originX, originY, radius, circleID) {
-		//var circleID = "" + originX + "-" + originY;
-		
-		$("<canvas>").attr({
-			id: circleID,
-			class: "circle inactive",
-			width: 2 * radius,
-			height: 2 * radius
-		}).css({
-			width: 2 * radius + "px",
-			height: 2 * radius + "px",
-			position: "absolute",
-			top: (originY - radius) + "px",
-			left: (originX - radius) + "px",
-			zIndex: "100"
-		}).appendTo("#div_" + current_id);
-		
-		var canvas = document.getElementById(circleID);
-		var context = canvas.getContext('2d');
-		
-		drawCircle(context, radius, radius, radius);
-		
-		var circleObject = $("#" + circleID);
-		
+	
+	// Make the circle given by the jQuery object active
+	var setCircleActive = function(circleObject) {
 		circleObject.hover(
 			function(e) {
 				circleHover = true;
@@ -128,7 +93,21 @@
 				$(document).off("keydown");
 			}
 		);
-
+		
+		circleObject.draggable("enable");
+		
+		console.log("Circle set to active");
+	}
+	
+	// Make the circle given by the jQuery object inactive
+	var setCircleInactive = function(circleObject) {
+		circleObject.removeClass("circle");
+        circleObject.addClass("inactive");
+        circleObject.off("mouseenter mouseleave");
+		
+		circleObject.draggable("disable");
+		
+		console.log("Circle set to inactive");
 	}
 
     $(document).ready(function() {
@@ -186,7 +165,8 @@
 				// If valid circle drawn, save it
                 var distance = euclidDist(origin.left, origin.top, left, top);
 				if (distance > 2 * OUTLINE_SIZE + STROKE_SIZE) {
-					saveCircle(origin.left, origin.top, distance);
+					var circleObject = saveCircle(origin.left, origin.top, distance, null, "div_" + current_id);
+					setCircleActive(circleObject);
 				}
 				
 				// Make sure drawing canvas is clear

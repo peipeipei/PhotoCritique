@@ -18,9 +18,7 @@ $(document).ready(function(){
                 snapshot.forEach(function(data) {
                     var annotation = data.val();
 
-                    // create new div for different groups - there is an issue with the last circle added.
-                    // the last circle always appears active and when I delete the entire div, that circle doesn't
-                    // get deleted for some reason
+                    // create new div for different groups
                     if (annotation.currentID != current_id){
                         current_id ++;
                         var div = document.createElement("div");
@@ -29,16 +27,9 @@ $(document).ready(function(){
                         $("#photo-wrapper").append(div);
                     }
 
-                    var canvas = document.getElementById("drawing-canvas");
-                    var context = canvas.getContext('2d');
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-
-                    drawCircle(context, annotation.originX, annotation.originY, annotation.radius);
-                    saveInactiveCircle(annotation.originX, annotation.originY, annotation.radius, data.key());
+                    var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "div_" + current_id);
+					setCircleInactive(circleObject);
                 })
-
-                // make circles not draggable initially 
-                $(".circle").draggable({disabled :true});
             });
 
             commentsRef.once("value", function(snapshot){
@@ -104,7 +95,7 @@ $(document).ready(function(){
                 $("#add_comment").attr("disabled", false);
 
                 $("#div_" + id).children().each(function (){
-                    $(this).draggable("disable");
+					setCircleInactive($(this));
                 })
 
                 // add each circle to firebase
@@ -132,12 +123,6 @@ $(document).ready(function(){
                     currentID: parseInt(id),
                     text: msg,
                 });
-
-                var allCircles = $(".circle");
-                allCircles.removeClass("circle");
-                allCircles.addClass("inactive");
-                allCircles.off("mouseenter mouseleave");
-
             })
 
             // delete a comment
@@ -213,7 +198,7 @@ $(document).ready(function(){
 
             // make circles with id not draggable
             $("#div_" + id).children().each(function (){
-                $(this).draggable("disable");
+                setCircleInactive($(this));
             })
 
             // update text of comment
@@ -298,12 +283,8 @@ $(document).ready(function(){
                     snapshot.forEach(function(data) {
                         var annotation = data.val();
 
-                        var canvas = document.getElementById("drawing-canvas");
-                        var context = canvas.getContext('2d');
-                        context.clearRect(0, 0, canvas.width, canvas.height);
-
-                        drawCircle(context, annotation.originX, annotation.originY, annotation.radius);
-                        saveCircle(annotation.originX, annotation.originY, annotation.radius);
+                        var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "#div_" + id);
+						setCircleInactive(circleObject);
                     })
                 });
             });
@@ -348,8 +329,8 @@ $(document).ready(function(){
                     addIcons("comment_" + id)
                     
                     $("#div_" + id).children().each(function (){
-                        $(this).removeClass("inactive")
-                        $(this).addClass("draggable");
+						$(this).removeClass("inactive");
+                        $(this).addClass("circle");
                     })
                 }
                 //deactivate all other comments
@@ -357,8 +338,7 @@ $(document).ready(function(){
                     $("#comment_" + comment_id).removeClass("active");
 
                     $("#div_" + comment_id).children().each(function (){
-                        $(this).addClass("inactive");
-                        $(this).removeClass("draggable")
+                        setCircleInactive($(this));
                     })
                 }
             })
