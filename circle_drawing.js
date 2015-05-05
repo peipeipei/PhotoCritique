@@ -45,7 +45,7 @@
 			circleID = "" + originX + "-" + originY;
 		}
 		
-		console.log("Saving circle with ID " + circleID);
+		console.log("Saving circle " + circleID + " to group " + groupID);
 		
 		$("<canvas>").attr({
 			id: circleID,
