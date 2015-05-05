@@ -241,7 +241,7 @@ $(document).ready(function(){
 
                         annotationsRef.child(key).update({radius: radius, originX: centerX, originY: centerY});
                     })
-                })
+                });
 
 
                 // add new annotations, need to not add duplicates
