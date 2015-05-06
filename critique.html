@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="critique.css">
     <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
         <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="circleDrawing.css" />
     <title>Critique for Bunny and Chicks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
           <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -17,6 +18,7 @@
     
     <script type="text/javascript" src="critique.js">
    </script>
+   <script type="text/javascript" src="circle_drawing.js"></script>
 </head>
 <body>
    <nav class="navbar navbar-default" role="navigation">
@@ -69,8 +71,7 @@
 <div id = "photo">
     <h3>Title: Bunny and Chicks<span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" data-original-title='Click on the + symbol to add a comment. To highlight a region in your comment, click on the "Add Annotation" button. Click on a comment to edit or delete it'></span></h3>
     <!--<img id = "image" src="annotated_photos/cute-animals-group0.jpg" style="width:512px;"/>-->
-    <img id = "image" src="gallery_photos/cute-animals.jpg" style = "width: 512px;"/>
-    <div>
+    <div id = "photo-wrapper"><img id = "photo" src="gallery_photos/cute-animals.jpg" style = "width: 512px; padding: 0;"/></div>
         <h3>Overall Comments:</h3>
         <textarea style="width: 518px; height:150px">Great job! I really like the photo. Just work on a few things =)</textarea>
         <div class="btn-toolbar"><button id = "send_message" class="btn btn-danger">Send</button> 

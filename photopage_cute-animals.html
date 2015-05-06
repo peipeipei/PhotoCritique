@@ -60,6 +60,7 @@
 </head>
     
 <body>
+
    <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -68,95 +69,105 @@
                 <span class="icon-bar"></span>
             </button>    
         </div>
-        <!--<div class="navbar-collapse collapse">-->
+            <a class="navbar-brand" href="#">Aperture</a>
+        <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
-                <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
-                <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
                 <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
             </ul>
-        <!--</div>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="glyphicon glyphicon-user" title="Your Profile">John Smith</a></li>
+                <li><a href="#" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+            </ul>
+        </div>
     </nav>
     
-    <div class="left">
-        <img src="gallery_photos/cute-animals.jpg" alt="Bunny" style="width:512px;">
-            
-        <div class="photopage_descrip">
-            <p>Rawr rawr rawr</p>
-            <p>Photographer: <strong>bunnymaster</strong></p>
-        </div>
-        
-        <div class="comment_area">
-            <textarea>
-            </textarea>
-            
-            <div class="comment_btn_area">
-                <button class="btn comment_button">Comment</button>
-        
-            </div>
-        </div>
-        
-        <div class="photopage_comments">
-
-            <div class="a_comment">
-                <p class="username">Username1</p>
-                <div class="the_comment">
-                    Here is the first comment. I think the picture is quite cute and the details are amazing. 
-                    Thank you for posting it! 
-                </div>
-            </div>
-            
-            <div class="a_comment">
-                <p class="username">Username2</p>
-                <div class="the_comment">
-                    I love bunnies! 
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="right">
-        
-        <div class="button_area">
-            <a href = "critique.html"><button id = "critique" title="Critique this Photo" class="btn btn-default"><span class="glyphicon glyphicon-envelope" > </span></button></a>
-            <button id = "like" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty like-button unliked"> </span></button>
-            <button id = "send-request" title = "Send a request" class="btn btn-default"><span class="glyphicon glyphicon-new-window"> </span></button>
-        </div>
-        
-        <div class="camera_info">
-            <table>
-                <tr>
-                    <td class="cam_info_left">Camera</td>
-                    <td class="cam_info_right">Nikon D700</td>
-                </tr>
-                
-                <tr>
-                    <td class="cam_info_left">Focal Length</td>
-                    <td class="cam_info_right">85mm</td>
-                </tr>
-                
-                <tr>
-                    <td class="cam_info_left">Shutter Speed</td>
-                    <td class="cam_info_right">1/320 s</td>
-                </tr>
-                
-                <tr>
-                    <td class="cam_info_left">Aperture</td>
-                    <td class="cam_info_right">f/1.4</td>
-                </tr>
-                
-                <tr>
-                    <td class="cam_info_left">ISO/Film</td>
-                    <td class="cam_info_right">200</td>
-                </tr>
-                
-            </table>
-        </div>
-        
-        
+    <div class="material">
+	    <div class="top">
+	        <div style="text-align: center;">
+	          <img src="gallery_photos/cute-animals.jpg" alt="Bunny" style="width:100%;">
+	        </div>
+	    </div>
+	    
+	    <div class="bottom_left">
+	        <div class="photopage_descrip">
+	            <p  style = "font-size:20px; font-weight:bolder;"> Title - <a class="username">John Smith</a></p>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+	            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+	            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	            <!--  p>Photographer: <strong>bunnymaster</strong></p-->
+	        </div>
+	        
+	        <div class="comment_area">
+	            <textarea style="width:512px;">
+	            </textarea>
+	            
+	            <div class="comment_btn_area">
+	                <button class="btn comment_button">Comment</button>
+	        
+	            </div>
+	        </div>
+	        
+	        <div class="photopage_comments">
+	
+	            <div class="a_comment">
+	                <p class="username">Jane Hue</p>
+	                <div class="the_comment">
+	                    Here is the first comment. I think the picture is quite cute and the details are amazing. 
+	                    Thank you for posting it! 
+	                </div>
+	            </div>
+	            
+	            <div class="a_comment">
+	                <p class="username">Emily Smith</p>
+	                <div class="the_comment">
+	                    I love bunnies! 
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <div class="bottom_right">
+	        
+	        <div class="button_area">
+	            <a href = "critique.html"><button id = "critique" title="Critique this Photo" class="btn btn-default"><span class="glyphicon glyphicon-envelope" > </span></button></a>
+	            <!-- <button id = "like" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty like-button unliked"> </span></button>
+	            <button id = "send-request" title = "Send a request" class="btn btn-default"><span class="glyphicon glyphicon-new-window"> </span></button> -->
+	        </div>
+	        
+	        <div class="camera_info">
+	            <table style="width:100%;">
+	                <tr>
+	                    <td class="cam_info_left">Camera</td>
+	                    <td class="cam_info_right">Nikon D700</td>
+	                </tr>
+	                
+	                <tr>
+	                    <td class="cam_info_left">Focal Length</td>
+	                    <td class="cam_info_right">85mm</td>
+	                </tr>
+	                
+	                <tr>
+	                    <td class="cam_info_left">Shutter Speed</td>
+	                    <td class="cam_info_right">1/320 s</td>
+	                </tr>
+	                
+	                <tr>
+	                    <td class="cam_info_left">Aperture</td>
+	                    <td class="cam_info_right">f/1.4</td>
+	                </tr>
+	                
+	                <tr>
+	                    <td class="cam_info_left">ISO/Film</td>
+	                    <td class="cam_info_right">200</td>
+	                </tr>
+	                
+	            </table>
+	        </div>
+	        
+	        
+	    </div>
     </div>
     
     <!--<div class="overlay">

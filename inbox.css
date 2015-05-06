@@ -4,6 +4,7 @@ body {
 #overall_container {
 	height: 100%;
 	position: absolute;
+	width:100%;
 }
 #container {
 	float:left;
@@ -13,7 +14,7 @@ body {
 .inbox_div table {
 	border: 1px solid lightgrey;
 	background-color: #eeeeee;
-	width: 80%;
+	width: 75%;
 }
 
 .inbox_div tr {
