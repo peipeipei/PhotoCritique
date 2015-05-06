@@ -83,6 +83,8 @@
 					if (e.keyCode == 8 || e.keyCode == 46) {
 						circleObject.remove();
 						circleHover = false;
+
+						deleted.push(circleObject.attr("id"));
 					}
 				});
 			},

@@ -5,6 +5,7 @@ var drawable = false;
 var current_id = 0;
 var this_id = 0;
 var id_list = [];
+var deleted = [];
 var editing = false;
 
 $(document).ready(function(){
@@ -125,7 +126,7 @@ $(document).ready(function(){
                 var centerY = parseInt(top) + radius;
 
                 var annotationRef = annotationsRef.push({
-                    currentID: current_id,
+                    currentID: parseInt(current_id),
                     radius: radius,
                     originX: centerX,
                     originY: centerY
@@ -173,8 +174,9 @@ $(document).ready(function(){
                 drawable = true;
                 var id = this.id.substring(5);
                 this_id = id;
-                var text = ""
-                id_list = []
+                var text = "";
+                id_list = [];
+                deleted = [];
 
                 // make circles of current id active and draggable
                 $("#div_" + id).children().each(function (){
@@ -270,7 +272,7 @@ $(document).ready(function(){
                         var centerY = parseInt(top) + radius;
 
                         var annotationRef = annotationsRef.push({
-                            currentID: id,
+                            currentID: parseInt(id),
                             radius: radius,
                             originX: centerX,
                             originY: centerY
@@ -282,6 +284,11 @@ $(document).ready(function(){
                         console.log("no added circles");
                     }
 
+                })
+
+                deleted.forEach(function(circle_id){
+                        var circleRef = new Firebase('https://6813-aperture.firebaseio.com/annotations/' + circle_id);
+                        circleRef.remove();
                 })
 
 
@@ -315,6 +322,7 @@ $(document).ready(function(){
                 // add original circles back
                 annotationsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                     snapshot.forEach(function(data) {
+                        console.log(data);
                         var annotation = data.val();
 
                         var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "div_" + id);
