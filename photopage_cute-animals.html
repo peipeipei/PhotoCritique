@@ -23,7 +23,10 @@
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   </style>
+
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script type="text/javascript">
+        var critiquesRef = new Firebase("https://6813-aperture.firebaseio.com/critiques");
         $(document).ready(function(){
             $(".comment_button").on("click", function(){
                 var comment = $('textarea').val();
@@ -50,6 +53,18 @@
 
             $("#send-request").on("click", function() {
               $("#myModal").modal('show');
+            })
+
+            $("#critique").on("click", function() {
+
+                var critiqueRef = critiquesRef.push({
+                    username: "John Smith",
+                    subject: "Bunny",
+                    time: "",
+                    imageName: "cute-animals.jpg"
+                });
+                var critiqueID = critiqueRef.key()
+                window.location = "critique.html?q=" + critiqueID;
             })
         });
 
@@ -131,7 +146,7 @@
 	    <div class="bottom_right">
 	        
 	        <div class="button_area">
-	            <a href = "critique.html"><button id = "critique" title="Critique this Photo" class="btn btn-default"><span class="glyphicon glyphicon-envelope" > </span></button></a>
+	            <button id = "critique" title="Critique this Photo" class="btn btn-default"><span class="glyphicon glyphicon-envelope" > </span></button>
 	            <!-- <button id = "like" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty like-button unliked"> </span></button>
 	            <button id = "send-request" title = "Send a request" class="btn btn-default"><span class="glyphicon glyphicon-new-window"> </span></button> -->
 	        </div>
