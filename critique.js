@@ -1,15 +1,3 @@
-var critiquesRef = new Firebase("https://6813-aperture.firebaseio.com/critiques");
-var critiqueRef = critiquesRef.push({
-    username: "John Smith",
-    subject: "Bunny",
-    time: "",
-    imageName: "cute-animals.jpg"
-});
-var critiqueID = critiqueRef.key()
-
-var annotationsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/annotations");
-var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/comments");
-
 var drawable = false;
 var current_id = 0;
 var this_id = 0;
@@ -18,14 +6,24 @@ var deleted = [];
 var editing = false;
 
 $(document).ready(function(){
-	var offsetLeft = $("#photo").offset().left;
-	var offsetTop = $("#photo").offset().top;
-	
+
+    var critiqueID = getQueryVariable("q")
+
+    var critiqueRef = new Firebase("https://6813-aperture.firebaseio.com/critiques/" + critiqueID);
+    var annotationsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/annotations");
+    var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/comments");
+
 	// display tooltip for instructions
 	$('[data-toggle="tooltip"]').tooltip({
 		placement : 'bottom'
 	});
 	
+    critiqueRef.once("value", function(snapshot) {
+        var critique= snapshot.val();
+        var imgName = critique.imageName;
+        $("#photo").attr("src", "gallery_photos/" + imgName);
+
+    });
 	// display all annotations and circles in firebase table
 	annotationsRef.once("value", function(snapshot) {
 		snapshot.forEach(function(data) {
@@ -330,7 +328,19 @@ $(document).ready(function(){
 			});
 		});
 	});
-	
+
+	// From: https://css-tricks.com/snippets/javascript/get-url-variables/
+    function getQueryVariable(variable)
+    {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+    }
+
 	// generate html for a comment
 	function getComment(commentID, msg){
 		var comment = document.createElement("div");
