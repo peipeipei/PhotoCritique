@@ -50,10 +50,12 @@ $(document).ready(function(){
                 this_id = current_id;
                 console.log(current_id, this_id)
                 drawable = true;
+				editing = true;
                 var div = document.createElement("div");
                 div.id = "div_" + current_id;
                 div.className = "circle-group";
                 $("#photo-wrapper").append(div);
+				$("#div_" + this_id).css("z-index", "100");
 
                 // add comment div
                 var comment = document.createElement("div");
@@ -73,11 +75,15 @@ $(document).ready(function(){
 
                 // disable add_comment button
                 $(this).attr("disabled", true);
+				
+				activate2(this_id);
+				$(comment).addClass("active");
             })
 
             // cancel a comment
             $(document).on("click", ".cancel", function() {
                 drawable = false;
+				editing = false;
                 var id = this.id.substring(7);
                 $("#div_" + id).remove();
                 $("#comment_" + id).remove();
@@ -88,6 +94,7 @@ $(document).ready(function(){
             // post a comment
             $(document).on("click", ".post", function() {
                 drawable = false;
+				editing = false;
 
                 var id = this.id.substring(5);
 
@@ -105,6 +112,8 @@ $(document).ready(function(){
                 $("#div_" + id).children().each(function (){
 					setCircleInactive($(this));
                 })
+				
+				$("#div_" + id).css("z-index", "50");
 
                 // add each circle to firebase
             $("#div_" + current_id).children().each(function (){
@@ -172,6 +181,9 @@ $(document).ready(function(){
                     setCircleActive($(this));
                     id_list.push($(this).attr("id"));
                 })
+				
+				$("#div_" + id).css("z-index", "100");
+				
                 // search for comment with specified id in firebase
                 commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
                      snapshot.forEach(function(data) {
@@ -213,6 +225,8 @@ $(document).ready(function(){
             $("#div_" + id).children().each(function (){
                 setCircleInactive($(this));
             })
+			
+			$("#div_" + id).css("z-index", "50");
 
             // update text of comment
             commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
@@ -283,10 +297,7 @@ $(document).ready(function(){
             editing = false;
             drawable = false;
 
-            // make circles with id not draggable
-            $("#div_" + id).children().each(function (){
-                $(this).draggable("disable");
-            })
+            $("#div_" + id).css("z-index", "50");
 
             // set text of comments equal to old text
             commentsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot) {
@@ -343,7 +354,7 @@ $(document).ready(function(){
 
         // activate comment that is clicked on or hovered and deactivate others
         function activate2(id){
-            $(".comment").each(function(i, obj){
+			$(".comment").each(function(i, obj){
                 var comment_id = obj.id.substring(8);
 
                 // activate comment and circles
@@ -355,6 +366,8 @@ $(document).ready(function(){
 						$(this).removeClass("inactive");
                         $(this).addClass("circle");
                     })
+					
+					$("#div_" + id).css("z-index", "100");
                 }
                 //deactivate all other comments
                 else {
@@ -363,6 +376,8 @@ $(document).ready(function(){
                     $("#div_" + comment_id).children().each(function (){
                         setCircleInactive($(this));
                     })
+					
+					$("#div_" + comment_id).css("z-index", "50");
                 }
             })
 

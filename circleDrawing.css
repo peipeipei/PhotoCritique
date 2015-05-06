@@ -12,6 +12,7 @@
 
 .circle-group {
 	position: relative;
+	z-index: 50;
 }
 
 .circle {

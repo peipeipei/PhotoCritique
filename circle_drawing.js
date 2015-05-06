@@ -57,8 +57,7 @@
 			height: 2 * radius + "px",
 			position: "absolute",
 			top: (originY - radius) + "px",
-			left: (originX - radius) + "px",
-			zIndex: "100"
+			left: (originX - radius) + "px"
 		}).appendTo("#" + groupID);
 		
 		var canvas = document.getElementById(circleID);
@@ -129,7 +128,7 @@
 			position: "absolute",
 			top: "0px",
 			left: "0px",
-			zIndex: "50"
+			zIndex: "10"
 		}).appendTo("#photo-wrapper");
 		
 		// Listen for mousedown on photo
@@ -142,6 +141,11 @@
 			}
 			
             var origin = {top: Math.round(e.pageY - photoTop), left: Math.round(e.pageX - photoLeft)};
+			
+			$("#drawing-canvas").css("z-index", "200");
+			
+			var canvas = document.getElementById("drawing-canvas");
+			var context = canvas.getContext('2d');
             
             // Start listening for mouse movements
             $(document).mousemove(function(e) {
@@ -151,8 +155,6 @@
 				// If cursor has been dragged far enough, show a circle
                 var distance = euclidDist(origin.left, origin.top, left, top);
 				if (distance > 2 * OUTLINE_SIZE + STROKE_SIZE) {
-					var canvas = document.getElementById("drawing-canvas");
-					var context = canvas.getContext('2d');
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					
 					drawCircle(context, origin.left, origin.top, distance);
@@ -172,10 +174,9 @@
 				}
 				
 				// Make sure drawing canvas is clear
-				var canvas = document.getElementById("drawing-canvas");
-				var context = canvas.getContext('2d');
 				context.clearRect(0, 0, canvas.width, canvas.height);
                 $(document).off("mousemove");
+				$("#drawing-canvas").css("z-index", "10");
             });
         });
     });
