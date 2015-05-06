@@ -1,5 +1,14 @@
-var annotationsRef = new Firebase("https://6813-aperture.firebaseio.com/annotations");
-var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/comments");
+var critiquesRef = new Firebase("https://6813-aperture.firebaseio.com/critiques");
+var critiqueRef = critiquesRef.push({
+    username: "John Smith",
+    subject: "Bunny",
+    time: "",
+    imageName: "cute-animals.jpg"
+});
+var critiqueID = critiqueRef.key()
+
+var annotationsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/annotations");
+var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/comments");
 
 var drawable = false;
 var current_id = 0;
@@ -418,6 +427,13 @@ $(document).ready(function(){
     	})
 
         $("#send_message").on("click", function(){
+
+            var date = new Date();
+            var n = date.toDateString();
+            var time = date.toLocaleTimeString();
+            var timestamp = n + " " + time;
+
+            critiqueRef.update({time: timestamp})
             window.location = "inbox.html";
         })
 })

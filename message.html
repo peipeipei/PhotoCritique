@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="photopage.css">
+    <link rel="stylesheet" type="text/css" href="critique.css">
+    <link rel="stylesheet" type="text/css" href="vertical_navbar.css">
+        <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="circleDrawing.css" />
+    <title>Critique for Bunny and Chicks</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+          <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+      <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans' rel='stylesheet' type='text/css'>
+    
+    <!--<script type="text/javascript" src="critique.js">
+   </script>-->
+   <script type="text/javascript" src="circle_drawing.js"></script>
+   <script type = "text/javascript" src = "message.js"></script>
+
+</head>
+<body>
+   <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>    
+        </div>
+        <!--<div class="navbar-collapse collapse">-->
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="gallery1.html"><img src = "logo_header.png"/></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="gallery1.html" class="glyphicon glyphicon-user" title="Your Profile"> pikachu</a></li>
+                <li><a href="inbox.html" class="glyphicon glyphicon-inbox" title="Inbox"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-cloud-upload" title="Upload"></a></li>
+                <li><a href="#" class="glyphicon glyphicon-globe" title="Explore"></a></li>
+            </ul>
+        <!--</div>-->
+    </nav>
+
+<div id = "overall_container">    
+<div id = "inbox">
+<ul>
+<li><a href = "inbox.html" style="font-weight: bold">Inbox (5)</a></li>
+<li><a href = "#">Sent Critiques</a></li>
+<li><a href = "critique.html">Drafts</a></li>
+<li><a href = "#">Starred</a></li>
+</ul>
+</div>
+<div id = "container">
+    <div style="border-bottom: 2px solid #FF4242; font-family: Trebuchet MS; font-size: 20px">
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 ">Subject: </label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" value = "Re: Bunny and Chicks">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 ">To: </label>
+    <div class="col-sm-10">
+      bunnymaster
+    </div>
+  </div>
+</form>
+</div>
+<div id = "photo-wrap">
+    <h3>Title: Bunny and Chicks<span class="glyphicon glyphicon-question-sign pull-right" data-toggle="tooltip" data-original-title='Click on the + symbol to add a comment. To highlight a region in your comment, click on the "Add Annotation" button. Click on a comment to edit or delete it'></span></h3>
+    <!--<img id = "image" src="annotated_photos/cute-animals-group0.jpg" style="width:512px;"/>-->
+    <div id = "photo-wrapper"><img id = "photo" src="gallery_photos/bunny.jpg" style = "width: 512px; padding: 0;"/></div>
+        <h3>Overall Comments:</h3>
+        <textarea style="width: 518px; height:150px">Great job! I really like the photo. Just work on a few things =)</textarea>
+        <div class="btn-toolbar"><button id = "send_message" class="btn btn-danger">Send</button> 
+        <button class="btn btn-default pull-right"><span title = "Delete" class="glyphicon glyphicon-trash"></span></button>
+        <button class="btn btn-default pull-right"><span title = "Save as Draft" class="glyphicon glyphicon-save"></span></button>
+    </div>
+    </div>
+    <!--<div><button id = "annotate" class = "btn btn-default" title = "Add annotation"><img src="circle.png"></button>
+    <button id = "group" class = "btn btn-default"  title = "Group circles"><img src="circle-group.png"></button></div>-->
+</div>
+<div id = "comments">
+	<h3> Focal Points <button id = "add_comment" title="Add a comment and annotations" class = "btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button></h3>
+	<!--<div class = "comment active" id="comment_1">
+		These areas are in the shadow and I think they would look better if they were in light.
+	</div>
+	<div class = "comment" id = "comment_2">
+		Great focus! I love how the whiskers and fur stand out!
+	</div>
+	<div class = "comment" id = "comment_3">
+		I like how the background is blurred so the animals stand out.
+	</div>-->
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
