@@ -6,7 +6,7 @@ var deleted = [];
 var editing = false;
 
 $(document).ready(function(){
-	$("#loading").modal();
+	$("#loading").modal("show");
 
     var critiqueID = getQueryVariable("q")
 
@@ -20,9 +20,9 @@ $(document).ready(function(){
 	});
 	
     critiqueRef.once("value", function(snapshot) {
-        var critique= snapshot.val();
-        var imgName = critique.imageName;
-        $("#photo").attr("src", "gallery_photos/" + imgName);
+        //var critique = snapshot.val();
+        //var imgName = critique.imageName;
+        //$("#photo").attr("src", "gallery_photos/" + imgName);
 
         // display all annotations and circles in firebase table
         annotationsRef.once("value", function(snapshot) {
@@ -51,8 +51,7 @@ $(document).ready(function(){
                 });
             });
 
-            // REPLACE with code that gets rid of loading thingy!
-            console.log("DONE");
+			$("#loading").modal("hide");
         });
     });
 
