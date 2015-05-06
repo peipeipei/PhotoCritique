@@ -106,7 +106,7 @@ $(document).ready(function(){
                 var comment = getComment("comment_" + id, msg);
                 $("#comments").append(comment);
 
-                activate2(id)
+                activate2(id);
   
                 $("#add_comment").attr("disabled", false);
 
@@ -241,6 +241,8 @@ $(document).ready(function(){
 
                 // replace edit comment with textarea with a regular comment
                 $("#comment_edit_" + id).replaceWith(comment);
+				
+				activate2(id);
 
                 // remove old annotations
                 annotationsRef.orderByChild("currentID").equalTo(parseInt(id)).once("value", function(snapshot){
@@ -292,14 +294,12 @@ $(document).ready(function(){
                 })
 
 
-            });   
-
-
+            });
         })
 
         // cancel an edit
         $(document).on("click", ".cancel_edit", function(){
-            var id = this.id.substring(12);
+			var id = this.id.substring(12);
             this_id = id;
             editing = false;
             drawable = false;
@@ -327,7 +327,9 @@ $(document).ready(function(){
 
                         var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "div_" + id);
 						setCircleInactive(circleObject);
-                    })
+                    });
+					
+					activate2(id);
                 });
             });
         })
@@ -362,6 +364,8 @@ $(document).ready(function(){
 
         // activate comment that is clicked on or hovered and deactivate others
         function activate2(id){
+			console.log("Activating " + id);
+			
 			$(".comment").each(function(i, obj){
                 var comment_id = obj.id.substring(8);
 
