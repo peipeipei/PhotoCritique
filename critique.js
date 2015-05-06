@@ -24,34 +24,38 @@ $(document).ready(function(){
         var imgName = critique.imageName;
         $("#photo").attr("src", "gallery_photos/" + imgName);
 
+        // display all annotations and circles in firebase table
+        annotationsRef.once("value", function(snapshot) {
+            snapshot.forEach(function(data) {
+                var annotation = data.val();
+            
+                // create new div for different groups
+                if (annotation.currentID != current_id){
+                    current_id = annotation.currentID;
+                    this_id++;
+                    var div = document.createElement("div");
+                    div.id = "div_" + current_id;
+                    div.className = "circle-group";
+                    $("#photo-wrapper").append(div);
+                }
+            
+                var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "div_" + current_id);
+                setCircleInactive(circleObject);
+            });
+
+            commentsRef.once("value", function(snapshot){
+                snapshot.forEach(function(data){
+                    var comment = data.val();
+                    var c = getComment("comment_" + comment.currentID, comment.text);
+                    $("#comments").append(c);
+                });
+            });
+
+            // REPLACE with code that gets rid of loading thingy!
+            console.log("DONE");
+        });
     });
-	// display all annotations and circles in firebase table
-	annotationsRef.once("value", function(snapshot) {
-		snapshot.forEach(function(data) {
-			var annotation = data.val();
-			
-			// create new div for different groups
-			if (annotation.currentID != current_id){
-				current_id = annotation.currentID;
-				this_id++;
-				var div = document.createElement("div");
-				div.id = "div_" + current_id;
-				div.className = "circle-group";
-				$("#photo-wrapper").append(div);
-			}
-			
-			var circleObject = saveCircle(annotation.originX, annotation.originY, annotation.radius, data.key(), "div_" + current_id);
-			setCircleInactive(circleObject);
-		});
-	});
-	
-	commentsRef.once("value", function(snapshot){
-		snapshot.forEach(function(data){
-			var comment = data.val();
-			var c = getComment("comment_" + comment.currentID, comment.text);
-			$("#comments").append(c);
-		});
-	});
+
 	
 	// when add comment is clicked, allow user to type a comment and add annotations
 	$("#add_comment").on("click", function(){

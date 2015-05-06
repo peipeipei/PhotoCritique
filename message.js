@@ -7,16 +7,18 @@ $(document).ready(function(){
 	var commentsRef = new Firebase("https://6813-aperture.firebaseio.com/" + critiqueID + "/comments");
 	var current_id = 0;
 	var this_id = 0;
+	var dragging = false;
+	var drawable = false;
 
 
-critiqueRef.once("value", function(snapshot) {
-  var critique= snapshot.val();
-  var imgName = critique.imageName;
+	critiqueRef.once("value", function(snapshot) {
+  		var critique= snapshot.val();
+  		var imgName = critique.imageName;
 
-  $("#photo").attr("src", "gallery_photos/" + imgName);
+  		$("#photo").attr("src", "gallery_photos/" + imgName);
 
-  console.log($("#photo"))
-});
+  		console.log($("#photo"))
+	});
 
             //display all annotations and circles in firebase table
             annotationsRef.once("value", function(snapshot) {
@@ -45,6 +47,48 @@ critiqueRef.once("value", function(snapshot) {
                     $("#comments").append(c);
                 })
             });
+
+    // activate comment that is clicked on or hovered and deactivate others
+	function activate2(id){
+		console.log("Activating " + id);
+		
+		$(".comment").each(function(i, obj){
+			var comment_id = obj.id.substring(8);
+			
+			// activate comment and circles
+			if (id === comment_id){
+				$("#comment_" + id).addClass("active");
+				
+				$("#div_" + id).children().each(function (){
+					$(this).removeClass("inactive");
+					$(this).addClass("circle");
+				})
+				
+				$("#div_" + id).css("z-index", "100");
+			}
+			//deactivate all other comments
+			else {
+				$("#comment_" + comment_id).removeClass("active");
+				
+				$("#div_" + comment_id).children().each(function (){
+					setCircleInactive($(this));
+				});
+				
+				$("#div_" + comment_id).css("z-index", "50");
+			}
+		});
+	}
+
+	$(document).on("click", ".circle", function(){
+			var parent_id = $(this).parent().attr("id")
+			var id = parent_id.substring(4);
+			activate2(id);
+	});
+	
+	$(document).on("click", ".comment", function(){
+			var id = this.id.substring(8)
+			activate2(id);
+	});
 // From: https://css-tricks.com/snippets/javascript/get-url-variables/
 function getQueryVariable(variable)
 {
