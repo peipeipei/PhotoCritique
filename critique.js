@@ -6,6 +6,7 @@ var deleted = [];
 var editing = false;
 
 $(document).ready(function(){
+	$("#loading").modal();
 
     var critiqueID = getQueryVariable("q")
 
