@@ -11,12 +11,18 @@
 			$(document).ready(function() {
 
 				$('.checkRemove').hide(); 
+
 				$(".remove").click(function() {
 					$(this).hide();   
-					$('.checkRemove').slideToggle(500);
+					var check = $(this).parent('.delete').children('.checkRemove');
+					$(check).slideToggle(500);
 				});
 				$(".yesDelete").click(function(){
-					$()
+					$(this).closest('.r-request').hide();
+				});
+				$(".noDelete").click(function(){
+					$(this).closest('.checkRemove').hide();
+					$(this).closest('.delete').children('.remove').show();
 				});
 			});
 
@@ -131,6 +137,14 @@
 				</div>
 
 			</div>
+
+			<br>
+
+			
+
+
+
+
 
 		</div>
 
